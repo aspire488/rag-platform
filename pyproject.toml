@@ -40,3 +40,10 @@ explicit = true
 
 [tool.uv.sources]
 torch = [{ index = "pytorch-cpu" }]
+
+[tool.pytest.ini_options]
+# Phase 1: reproducible local test runs - offline, deterministic, small fixtures.
+# Run from the project root with the project venv:
+#   .venv\Scripts\python.exe -m pytest
+testpaths = ["tests"]
+pythonpath = ["src"]
