@@ -1,0 +1,42 @@
+[project]
+name = "rag-platform"
+version = "0.0.1"
+description = "Local-first RAG engine with Evidence Ledger and Failure Observatory (plan v2.3)"
+readme = "README.md"
+requires-python = ">=3.14"  # R7 contingency: fallback to uv-managed 3.12/3.13 on D: (UV_PYTHON_INSTALL_DIR)
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "pydantic-settings",
+    "httpx",
+    # torch declared explicitly so the CPU-only index below applies (plan §3/§6: torch is CPU-only here;
+    # default Windows wheels would pull multi-GB CUDA packages, breaking the §10.1 venv budget)
+    "torch",
+    "sentence-transformers",
+    "qdrant-client",
+    "pypdf",
+    "psutil",
+    # networkx is M4-only (conditional experiment, D10) — deliberately deferred from the initial install
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "pip-audit",
+]
+
+[tool.uv]
+# Not packaged yet — src layout will be adopted when Phase 1 code exists.
+package = false
+
+# CPU-only torch wheels (zero-cost official index; setup-time package source only,
+# not a runtime service dependency — Z1/Z2 unaffected)
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]

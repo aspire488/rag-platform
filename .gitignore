@@ -1,0 +1,21 @@
+# Secrets and local env
+.env
+
+# All operational data lives under data\ (gitignored entirely; plan v2.3 §11)
+data/
+
+# Generated outputs
+reports/
+*.db
+
+# Caches and environments (all on D: via scripts\env.ps1)
+.venv/
+.cache/
+.python/
+__pycache__/
+*.pyc
+.ruff_cache/
+
+# Raw corpora and models (frozen eval datasets\ ARE committed; raw corpora are not)
+corpora/
+models/
