@@ -1,255 +1,220 @@
-# RAG Platform
+<h1 align="center">
+  <img src="docs/assets/retrieval-lab-hero.svg" width="720" alt="rag-platform">
+</h1>
 
-A resource-aware, local-first retrieval-augmented generation (RAG) platform with hybrid
-retrieval, controlled generation, and explicit safety boundaries. The project is developed
-against a canonical plan — **`RAG_Platform_Master_Plan_v2.4.md`** — and is currently
-through **Phase 3** of its implementation sequence: the storage and embedding foundations
-exist; the retrieval pipeline, generation stage, and evaluation harness do not yet.
+**rag-platform** is a local-first retrieval-augmented generation engine for one Windows laptop with 15 GB of RAM.
+Its data, caches, virtual environment and databases stay inside the project directory, and it sends nothing over the
+network by default. It is built in order, from the storage layer up, against a written plan, and it reports what it
+has not done as plainly as what it has. The header lists the nine stages every request will pass through, from
+`authn` to `response`. None of them runs yet.
 
-## 1. Problem statement and goals
+> [!NOTE]
+> **Where it stands:** phases 0 to 3 of 8 are committed, and all 106 tests passed on 2026-10-20. **There is no
+> working RAG pipeline yet:** nothing ingests a document, answers a query or generates text.
 
-Retrieval-augmented generation is easy to demo and hard to trust. Typical
-implementations silently depend on cloud services, unbounded resource usage, and
-unverifiable answers. This project targets the opposite:
+[Architecture](#architecture) | [Status](#status-board) | [Inside the code](#inside-the-code) |
+[Run it](#run-it) | [Limits](#known-limits) | [Plan v2.4](RAG_Platform_Master_Plan_v2.4.md) |
+[Resource budget](docs/RESOURCE_BUDGET.md)
 
-- **Run honestly on constrained hardware.** The development machine is a 15 GB RAM
-  Windows laptop; system resource safety outranks features and benchmarks
-  (`docs/RESOURCE_BUDGET.md`, plan §10.4).
-- **Prove, don't claim.** Every metric is measured here, dated, and labeled; every
-  status is `passed / failed / blocked / skipped / not-measured` — never silently
-  downgraded (plan §9.1, Appendix B).
-- **Cost-free by construction.** No API key is required for any gate or test; the
-  default configuration performs no outbound network traffic at all.
-- **Local core, optional cloud.** Ingestion, retrieval, authorization, evidence
-  assembly, and storage are local and stay functional when every LLM provider is
-  unavailable; cloud generation is a proposal that is *off by default* (plan v2.4
-  Appendix A, decisions D13–D18 — all pending).
+## Architecture
 
-## 2. Core design principles
+<p align="center">
+  <img src="docs/assets/architecture.svg" width="720" alt="Architecture as committed. Runs today: Settings feeds create_app, which serves GET /health and installs redacted logging. Built and tested on their own but not wired together: MiniLMEmbedder (384-dim, lazy, CPU), QdrantLocalStore (file-backed, no URL) and SQLite with FTS5 (WAL, trace tables); their wires end in open terminals. Planned path into the stores: documents (pdf, txt, md), then ingest (load, chunk, scan; in progress, not committed), then index (embed and store into the three blocks). After that, queries take the nine trace stages from the header.">
+</p>
 
-| Principle | What it means in practice |
-|---|---|
-| **Local-first** | All data, databases, caches, and models live under the project directory on the `D:` drive. No service dependency is required to run tests or gates. |
-| **Modular** | Source is split into independent modules (`config`, `db`, `vectorstore`, `embeddings`, future `ingestion`/`retrieval`/`generation`), each with its own tests. |
-| **Resource-aware** | Hard budgets with start gates and abort floors: 3 GB start gate, 2 GB emergency floor, binding caps (plan §10.1/§10.2). The owner's 90 %-total-RAM ceiling is documented policy; it is *not* enforced by application code — the application refuses/monitors/aborts only its own operations (plan §10.4). |
-| **Deterministic** | Offline, deterministic tests; frozen evaluation datasets; no retries-as-magic — failures surface as typed, recorded outcomes. |
-| **Security-conscious** | `EGRESS_MODE=off` by default, path containment (everything resolves under the project root), startup-rejection of invalid configuration, redacted logging that never echoes URLs, paths, keys, or prompts. |
+The picture has three zones, and the gaps between them are the honest part:
 
-## 3. Architecture overview
+1. **Runs today.** `create_app()` validates `Settings`, installs the redacting log handler and serves one route,
+   `GET /health`. This is the only code path that runs end to end.
+2. **Built, not wired.** The embedder, the vector store and the SQLite schema are real modules with their own
+   tests. No code calls one from another yet.
+3. **Planned.** Ingestion (phase 4, in progress) will feed the three stores. Queries then take the nine stages in
+   the header. Everything past the stores is design from the plan (§5 and §15), not code yet.
 
-What exists in code today (Phases 0–3) versus what the plan schedules next:
+## Status board
 
-```mermaid
-flowchart TB
-    subgraph impl["Implemented (Phases 0-3)"]
-        API["FastAPI app factory<br/>/health skeleton"]
-        CFG["Validated settings<br/>(egress_mode=off default)"]
-        LOG["Redacted logging<br/>(no URLs, paths, secrets)"]
-        DB[("SQLite + FTS5<br/>schema & migrations, trace tables")]
-        QS["Qdrant local adapter<br/>(file-backed persistence)"]
-        W["Lazy MiniLM embedding wrapper<br/>(validate before load, offline)"]
-        CACHE[("Project-local model cache<br/>SHA256-verified copy")]
-        W -.-> CACHE
-    end
+| Mark | Meaning |
+| --- | --- |
+| ● | Built and wired into the running app |
+| ◐ | Built and tested on its own; nothing calls it yet |
+| ✎ | In progress, not committed |
+| ○ | Planned in the canonical plan; no code |
+| ⊘ | Off by default |
+| – | Not measured |
 
-    subgraph planned["Planned (Phases 4-8, not implemented)"]
-        ING["Ingestion: loaders,<br/>chunker, injection scan"]
-        RET["Hybrid retrieval:<br/>dense + FTS5 + RRF"]
-        GEN["Generation stage:<br/>provider-neutral, off by default<br/>(retrieval-only otherwise)"]
-    end
+| Component | Status | Tests and notes |
+| --- | --- | --- |
+| Settings and startup rejection, [`config.py`](src/rag_platform/config.py) | ● built, wired | `test_config.py` |
+| Redacted logging, [`logging_setup.py`](src/rag_platform/logging_setup.py) | ● built, wired | `test_logging_redaction.py` |
+| `GET /health`, the only route, [`main.py`](src/rag_platform/main.py) | ● built, wired | `test_health.py`, `egress/` |
+| SQLite (WAL) + FTS5 + trace tables, [`db/`](src/rag_platform/db) | ◐ built, not wired | `test_db_sqlite.py` |
+| Qdrant local adapter, [`vectorstore/`](src/rag_platform/vectorstore) | ◐ built, not wired | `test_vectorstore_qdrant.py` |
+| MiniLM wrapper, [`minilm.py`](src/rag_platform/embeddings/minilm.py) | ◐ built, not wired | `test_embeddings_wrapper.py`; stub model only, the real model has never loaded |
+| Model cache copy with SHA-256 check, [`cache.py`](src/rag_platform/embeddings/cache.py) | ◐ built, not wired | `test_embeddings_cache.py` |
+| Ingestion: loaders, chunker, injection scan (phase 4) | ✎ in progress | local work, not on `main` yet |
+| Hybrid retrieval: dense + FTS5 + RRF (phase 5) | ○ planned | |
+| Generation, citations, abstention (phase 6) | ○ planned | local Ollama adapter only at M1 |
+| `LOCAL_GENERATION_ENABLED` | ⊘ off by default | no generation code exists for it to switch on yet |
+| `EGRESS_MODE` | ⊘ off by default | `egress/test_no_outbound.py` |
+| API + CLI (phase 7); eval harness and trace recorder (phase 8) | ○ planned | |
+| Cloud generation providers (phases 9 to 11) | ○ proposed | decisions D13 to D18 pending |
+| Model benchmark BG-1a (phase 0.5), [`bench_model.py`](scripts/bench_model.py) | – not measured | attempts stopped at the resource floors; see [`RESOURCE_BUDGET.md`](docs/RESOURCE_BUDGET.md) |
 
-    API --> CFG
-    API --> LOG
-    ING --> DB
-    ING --> QS
-    RET --> DB
-    RET --> QS
-    RET --> W
-    GEN -.-> RET
+Note the difference between the two "off" rows. Egress is a working guard: invalid or half-configured egress settings
+stop the app before it starts. Local generation is a flag with nothing behind it yet.
+
+## Inside the code
+
+### The one live surface
+
+`create_app()` builds the FastAPI app only from valid settings. OpenAPI and the docs pages are switched off, and
+`/health` reports labels and booleans, never URLs, paths or keys. This is the actual response from the committed code
+with default settings:
+
+```json
+{
+  "status": "ok",
+  "service": "rag-platform",
+  "version": "0.0.1",
+  "egress_mode": "off",
+  "egress_allowlist_configured": false,
+  "local_generation_enabled": false,
+  "paths_on_project": true
+}
 ```
 
-Notes on the current wiring, stated honestly:
+### Settings that refuse to start
 
-- `/health` reports configuration facts only — mode labels and booleans, never
-  configuration values (invariant I6).
-- `db`, `vectorstore`, and `embeddings` are standalone, fully tested modules.
-  **No pipeline connects them yet** — there is no ingestion, no retrieval endpoint,
-  and no generation code in the repository.
-- The embedding wrapper loads `sentence-transformers/all-MiniLM-L6-v2` strictly from
-  the project-local cache (`local_files_only=True`); it has **not** been executed
-  against a real model on this machine yet (see §9).
+[`Settings`](src/rag_platform/config.py) is a `pydantic-settings` model with `extra="forbid"`. It reads the
+environment and an optional project-root `.env`.
 
-## 4. Current implementation status
+| Key | Default | What is enforced |
+| --- | --- | --- |
+| `EGRESS_MODE` | `off` | `off` or `allowlist`; `off` with allowlist entries is rejected, and so is `allowlist` without any |
+| `EGRESS_ALLOWLIST` | `[]` | JSON list of exact entries, validated one by one |
+| `OLLAMA_BASE_URL` | `http://localhost:11434` | loopback host only, plain origin, no embedded credentials |
+| `PORT` | `8000` | valid port range |
+| `LOCAL_GENERATION_ENABLED` | `false` | boolean |
+| `ADAPTIVE_RETRIEVAL` | `off` | `on` or `off` |
+| `LOG_LEVEL` | `INFO` | `DEBUG`, `INFO`, `WARNING` or `ERROR` |
+| `DATA_DIR`, `REPORTS_DIR` | `data`, `reports` | must resolve inside the project root |
 
-| Phase | Scope | Status |
-|---|---|---|
-| **0** | Repository foundation: `git init`, pinned dependencies (uv), `.gitignore`, destination-aware disk checks, FTS5 detection, `.env.example` | **Complete** — commit `282cd11` |
-| **1** | Validated configuration (egress off, kill switches, startup rejection), redacted logging, `/health` skeleton | **Complete** — commit `7cee270` |
-| **2** | SQLite migrations + FTS5 schema + trace tables; Qdrant-local adapter with persistence/filter tests | **Complete** — commit `c27af5e` |
-| **3** | Provider-neutral, lazy MiniLM embedding wrapper; hash-verified local model-cache copy (decision D2) | **Complete** — commit `9acb0d3` |
-| 0.5 | BG-1a model benchmark (feeds generation decisions) | **Not completed** — recorded attempts aborted at the resource stop conditions and classified as incident evidence, not valid results; a compliant run awaits owner approval |
-| 4+ | Ingestion, retrieval, generation, API/CLI, evaluation, gates M1–M4 | **Not started** |
+### Storage, laid down before the pipeline
 
-The four implementation commits are linear and unrewritten (Phase 0 → 3).
+- **SQLite** ([`db/sqlite.py`](src/rag_platform/db/sqlite.py)): every connection runs in WAL mode with foreign keys
+  enforced, and paths that escape the project root are refused. Migrations are versioned through `user_version`.
+- **The schema** ([`db/schema.sql`](src/rag_platform/db/schema.sql)) holds an FTS5 keyword index (`chunk_fts`) and
+  three trace tables. `trace_stages` only accepts the nine stage names from the header image, one row per stage per
+  request, with excerpts capped at 200 characters. `trace_authz` records allowed and denied document IDs, never
+  content. Nothing writes to these tables yet; the recorder arrives in phase 8.
+- **Qdrant** ([`vectorstore/qdrant_local.py`](src/rag_platform/vectorstore/qdrant_local.py)): `QdrantLocalStore` takes
+  a filesystem path and has no URL or API-key parameter, so a remote connection cannot be configured. Inputs are
+  validated before any write; reads on a missing collection return empty, and writes to a missing collection fail.
+- **Two stores, no transaction across them.** [`test_storage_consistency.py`](tests/test_storage_consistency.py)
+  records that boundary on purpose: removing a vector leaves SQLite rows alone until phase 4 defines a combined
+  contract.
 
-## 5. Repository structure
+### Embeddings that load nothing until asked
 
+`MiniLMEmbedder` wraps `sentence-transformers/all-MiniLM-L6-v2`. Importing or constructing it imports neither
+`sentence_transformers` nor `torch`. The model loads on the first `encode()` call, with `local_files_only=True` and from
+a cache inside the project. The 384-dimension contract is a constant taken from the cached model's config files, and
+every `encode()` with the default model is checked against it. The tests use a stub model; **the real model has not been loaded on this machine yet.**
+
+## Design decisions
+
+| Decision | Why | Where |
+| --- | --- | --- |
+| Local core, egress off by default | Ingestion, retrieval and storage must work with every LLM provider unavailable | [`config.py`](src/rag_platform/config.py), plan §2 (Z2, Z11) and §5.4 |
+| Everything under the project root | One directory to back up, audit and delete; Ollama's models stay in Ollama's own store | `resolve_under_project`, [`scripts/env.ps1`](scripts/env.ps1) |
+| Hard resource floors over features | A 15 GB laptop must stay usable: 3 GB start gate, 2 GB emergency floor | [`docs/RESOURCE_BUDGET.md`](docs/RESOURCE_BUDGET.md) |
+| Typed failures, honest statuses | Every result is `passed`, `failed`, `blocked`, `skipped` or `not-measured`, and none is quietly downgraded | plan §9.1, Appendix B |
+| CPU-only torch, no provider SDKs | Smaller install, no hidden network clients | [`pyproject.toml`](pyproject.toml) |
+
+## Run it
+
+Requirements: Windows, a `D:` drive, [uv](https://docs.astral.sh/uv/) and PowerShell. The scripts assume the project
+lives at `D:\rag-platform`. Run everything from the project root.
+
+```powershell
+. .\scripts\env.ps1          # process-only env: caches and temp under D:\rag-platform, HF offline, EGRESS_MODE defaults to off
+uv sync                      # pinned dependencies, CPU-only torch index
+.\scripts\setup.ps1          # environment checks, writes a dated report under reports\
+.venv\Scripts\python.exe -m pytest
 ```
-.
-├── src/rag_platform/
-│   ├── config.py            # pydantic-settings; validated at startup; project-root path containment
-│   ├── logging_setup.py     # redacted logging (never logs secrets, URLs, paths, prompts)
-│   ├── main.py              # FastAPI app factory; /health only (docs/openapi disabled)
-│   ├── db/                  # SQLite opener (WAL, containment), migrations, schema.sql (FTS5 + traces)
-│   ├── vectorstore/         # Qdrant local (file-backed) adapter: add/search/filter/remove
-│   └── embeddings/          # lazy MiniLM wrapper + cache copy/verify utilities (Phase 3)
-├── tests/                   # hermetic tests: config, health, logging, db, vectorstore, embeddings
-│   └── egress/              # no-outbound assertions (expands at Phase 6)
-├── scripts/
-│   ├── env.ps1              # process-scoped env: all caches/temp on D:, HF offline flags, EGRESS_MODE=off
-│   ├── setup.ps1            # environment checks → dated report under reports\
-│   ├── check_fts5.py        # FTS5 availability probe
-│   └── bench_model.*        # owner benchmark scripts for the gated BG-1a protocol (not run here)
-├── docs/RESOURCE_BUDGET.md  # binding resource-safety policy (§5)
-├── data/                    # ALL operational data (SQLite, Qdrant, logs, traces, temp) — gitignored
-├── reports/                 # generated reports — gitignored, never published
-├── .cache/                  # uv + Hugging Face caches (model copy lives here) — gitignored
-├── pyproject.toml           # pinned dependencies; CPU-only torch index; pytest config
-├── uv.lock                  # locked dependency graph
-├── .env.example             # placeholder-only template; real .env is gitignored and absent
-└── RAG_Platform_Master_Plan_v2.4.md   # canonical plan (+ change note; superseded versions preserved)
+
+To serve `/health` locally (tests do not start a server):
+
+```powershell
+$env:PYTHONPATH = "src"
+.venv\Scripts\python.exe -m uvicorn --factory rag_platform.main:create_app
 ```
 
-## 6. Technology stack
+Last run, 2026-10-20: **106 passed** from a clone on `D:`. From any other drive, the two tests that assert the `D:`
+layout fail by design and the other 104 pass. Tests are hermetic: no network, no model load, fixtures under
+`data\tmp`. A `.env` file is optional; copy
+[`.env.example`](.env.example), which keeps egress off.
 
-Based on the actual, pinned dependencies (`pyproject.toml`, `uv.lock`):
+<details>
+<summary>Stack and repository layout</summary>
+<br>
 
 | Layer | Choice |
-|---|---|
-| Language / runtime | Python **3.14** (`requires-python = ">=3.14"`; documented fallback to uv-managed 3.12/3.13, plan R7) |
-| Environment & locks | **uv** (project-local cache/interpreter dirs on `D:`) |
-| API | **FastAPI** + **uvicorn** (OpenAPI/docs endpoints disabled) |
-| Configuration | **pydantic** / **pydantic-settings** (validated, startup-rejecting) |
-| HTTP client | **httpx** (future provider-neutral generation interface — no provider SDKs) |
-| Embeddings | **sentence-transformers** with **torch (CPU-only wheels)** — CUDA wheels deliberately excluded |
-| Vector store | **qdrant-client** in local/file-backed mode (no server) |
-| Document store | **SQLite** (stdlib) with **FTS5** full-text search + trace tables |
-| Documents | **pypdf** (planned Phase 4 loaders) |
-| System monitoring | **psutil** (resource gates) |
-| Testing / audit | **pytest**, **pytest-cov**, **pip-audit** |
+| --- | --- |
+| Runtime | Python 3.14 (`requires-python = ">=3.14"`), managed with uv |
+| API | FastAPI + uvicorn |
+| Config | pydantic, pydantic-settings |
+| Embeddings | sentence-transformers on CPU-only torch |
+| Vector store | qdrant-client in local, file-backed mode |
+| Keyword store and traces | SQLite (stdlib) with FTS5 |
+| Documents (phase 4) | pypdf |
+| Resource gates | psutil |
+| Tests and audit | pytest, pytest-cov, pip-audit |
 
-Explicitly *not* added (plan §6): provider SDKs, LiteLLM-class gateways, agent
-frameworks, hosted observability, `networkx` (deferred to a conditional M4 experiment).
+Not added on purpose: provider SDKs, LiteLLM-style gateways, agent frameworks, hosted observability, and `networkx`
+(deferred to a conditional M4 experiment). `.env`, `data/`, `reports/` and `.cache/` (including the model copy) are
+gitignored.
 
-## 7. Setup and development
-
-Prerequisites: Windows with a `D:` drive, [uv](https://docs.astral.sh/uv/), and
-PowerShell. All commands run from the project root.
-
-```powershell
-# 1. Process-scoped environment: caches/temp under D:\rag-platform,
-#    Hugging Face offline flags, EGRESS_MODE=off (no global changes)
-. .\scripts\env.ps1
-
-# 2. Sync pinned dependencies (CPU-only torch index)
-uv sync
-
-# 3. Environment checks → dated report under reports\
-.\scripts\setup.ps1
+```text
+src/rag_platform/
+  config.py            validated settings, path containment
+  logging_setup.py     redacting log handler
+  main.py              FastAPI app factory, /health only
+  db/                  SQLite opener, migrations, schema.sql
+  vectorstore/         Qdrant local adapter
+  embeddings/          lazy MiniLM wrapper, model cache copy and verify
+tests/                 hermetic tests; egress/ holds the no-outbound check
+scripts/               env.ps1, setup.ps1, check_fts5.py, bench_model.*
+docs/                  RESOURCE_BUDGET.md, README assets
+data/ reports/ .cache/ gitignored runtime state
 ```
 
-- Tests do not require a `.env` file. To run one locally, copy `.env.example` to
-  `.env` (gitignored, never committed) — the template contains placeholders only and
-  keeps outbound network disabled by default.
-- To start the API later (documented for discoverability; not exercised by tests):
+</details>
 
-  ```powershell
-  $env:PYTHONPATH = "src"
-  python -m uvicorn --factory rag_platform.main:create_app
-  ```
+## Known limits
 
-## 8. Testing
+- **No pipeline.** No ingestion, retrieval, generation, CLI or evaluation is on `main`.
+- **No real-model run.** The embedding wrapper has only been exercised with a stub.
+- **No benchmark numbers.** BG-1a has no valid result, and this repository claims no throughput, latency or quality
+  figures.
+- **The 90 % RAM ceiling is a policy, not code.** The app can only refuse or stop its own work (plan §10.4).
+- **Windows and `D:` only.** Two tests assert the project lives on `D:` and fail anywhere else.
+- **Cloud providers** are a proposal in plan v2.4. None is integrated, verified or enabled.
 
-```powershell
-.venv\Scripts\python.exe -m pytest        # from the project root
-```
+## What comes next
 
-Tests are hermetic by construction: configuration environment is scrubbed per test,
-fixtures stay under the project root (`data\tmp`, gitignored), and no test performs
-network access, loads a model, or contacts any service.
+Committed so far, one commit per phase: [`282cd11`](https://github.com/aspire488/rag-platform/commit/282cd11) scaffold and checks,
+[`7cee270`](https://github.com/aspire488/rag-platform/commit/7cee270) config, logging and `/health`, [`c27af5e`](https://github.com/aspire488/rag-platform/commit/c27af5e) SQLite and
+Qdrant, [`9acb0d3`](https://github.com/aspire488/rag-platform/commit/9acb0d3) MiniLM wrapper and cache.
 
-**Historical results (recorded during the corresponding implementation sessions,
-2026-10-19 — prior evidence, not a fresh run):**
+| Phase | Builds | Unlocks |
+| --- | --- | --- |
+| 4 | Loaders, chunker, injection scan, declared dates | The first rows in `chunk_fts` and Qdrant |
+| 5 | Dense + FTS5 retrieval fused with RRF, post-verify stub, score floor | Wires the three blocks together |
+| 6 | Provider-neutral generation, bounded context, citations, abstention | Retrieval-only answers by default |
+| 7 | API and CLI | A usable surface beyond `/health` |
+| 8 | Frozen corpus, eval harness, trace recorder | Gate M1, and the first rows in `trace_stages` |
 
-- Phase 1 suite: **47 passed**, 1 upstream `StarletteDeprecationWarning`
-  (fastapi/testclient — not project code).
-- Phase 2: **33 passed**; full suite at that time (Phases 1+2): **80 passed**.
-- Phase 3 targeted wrapper/cache tests: **26 passed, 0 failed** in 0.52 s.
-
-**No tests were executed during this publication.** The figures above are cited from
-the recorded implementation reports under `reports\` (gitignored, local-only); they
-were not re-run, and the full suite has not been re-run since the Phase 3 commit.
-
-## 9. Resource-safety, path containment, and network constraints
-
-- **Egress is off by default and cloud providers are not activated.**
-  `EGRESS_MODE=off` is the code default *and* the `env.ps1` default; there is no
-  provider configuration, no key, and no generation code path in the repository.
-  Enabling any provider is explicit, gated owner action (plan v2.4 §5.1, D13–D18 —
-  all pending). The default system is retrieval-*oriented* and becomes
-  retrieval-only by design once retrieval exists.
-- **Path containment.** Settings and storage helpers resolve every path under the
-  project root and refuse paths that escape it; `setup.ps1` asserts that
-  `UV_CACHE_DIR`, `UV_PYTHON_INSTALL_DIR`, `HF_HOME`, `TMP`/`TEMP`, logs, and
-  reports all resolve under `D:\rag-platform`. There is deliberately **no C:
-  free-space gate**; the project never writes outside its directory.
-- **Resource gates.** 3 GB start gate, 2 GB emergency floor, and binding memory/time
-  budgets are documented in `docs/RESOURCE_BUDGET.md`. The 90 %-total-RAM ceiling is
-  an owner policy target, not a code-enforced limit — a user-space application can
-  only refuse work and monitor its own operations (plan §10.4).
-- **Repository hygiene.** `.env`, `data/`, `reports/`, `.cache/` (including the
-  copied model weights), virtual environments, and compiled artifacts are gitignored
-  and were never staged. Repository content was scanned for credentials before
-  publication: none found.
-
-## 10. Roadmap (plan v2.4 §15)
-
-- **Phase 0.5 — BG-1a model benchmark:** not completed. Attempts recorded on
-  2026-10-19 aborted at the resource stop conditions (start gate / emergency RAM
-  floor) and are classified as incident evidence — **not valid benchmark results**,
-  with no throughput data; a compliant run awaits owner approval.
-- **Phase 4** — Ingestion: loaders, chunker, injection scan, declared-date capture.
-- **Phase 5** — Hybrid retrieval: dense + FTS5 + RRF, post-verify stub, score floor.
-- **Phase 6** — Generation: provider-neutral client interface (local Ollama adapter
-  only at M1), bounded context, citations, abstention path; **no provider enabled by
-  default → retrieval-only**; socket-instrumented egress proof.
-- **Phase 7** — API + CLI (incl. `report` skeleton).
-- **Phase 8** — Frozen corpus with planted structures + eval harness + trace
-  recorder → **Gate M1**, then milestones **M2** (evidence ledger), **M3**
-  (attribution/scoring), **M4** (budget policy/optimization).
-- **Phases 9–11** *(proposed, strictly additive, gated D15–D17)* — provider router
-  core, provider verification & enablement, provider-enabled evaluation.
-
-Decisions **D13–D18** (cloud-first architecture direction, provider order, provider
-verification, router implementation, provider evaluation, outbound budget numbers)
-are all **pending**; with them unapproved, execution is identical to the v2.3
-retrieval-only sequence.
-
-## 11. Current limitations and unverified behavior
-
-- **This is not a working RAG pipeline.** There is no ingestion, retrieval,
-  generation, CLI, or evaluation yet — only the `/health` skeleton and the
-  tested building blocks above.
-- **Model inference has never been run.** The Phase 3 cache copy is verified by
-  file hashes, and the expected embedding dimension (384) is derived from the local
-  model snapshot's `config.json` — **loading the model and producing embeddings on
-  this machine is unverified** and intentionally deferred.
-- **Test results are historical.** See §8; no fresh suite run accompanies this
-  publication.
-- **BG-1a benchmark: no valid result.** The recorded attempts aborted at resource
-  stop conditions; no benchmark, throughput, latency, or quality numbers are
-  claimed anywhere in this repository.
-- **Cloud providers: not integrated, not verified, not activated.** The provider
-  order in the plan is a proposal only; no model IDs, quotas, or pricing are asserted.
-- **The 90 % RAM ceiling is not code-enforced** (documented in §9 above).
-- **Windows/`D:`-specific.** Scripts and path assertions assume this layout.
+Milestones M2 to M4 (tenancy, evidence ledger, adaptive budget) follow; see plan §7. Start reading at
+[`main.py`](src/rag_platform/main.py) for the live path, [`schema.sql`](src/rag_platform/db/schema.sql) for the
+shape of what is coming, and [the plan](RAG_Platform_Master_Plan_v2.4.md) for why.
