@@ -74,7 +74,10 @@ def test_docs_and_openapi_disabled() -> None:
 
 def test_unknown_route_is_404() -> None:
     client = TestClient(create_app(_settings()))
-    assert client.get("/query").status_code == 404
+    # Phase 7 note: /query now exists (POST only), so the unknown-route probe
+    # uses a genuinely absent path; GET on /query is a 405 by design.
+    assert client.get("/no-such-route").status_code == 404
+    assert client.get("/query").status_code == 405
 
 
 def test_invalid_settings_reject_app_creation() -> None:
