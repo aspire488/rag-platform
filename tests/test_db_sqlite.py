@@ -36,7 +36,7 @@ from rag_platform.db import (
 
 _EXPECTED_TABLES = {"chunk_fts", "traces", "trace_stages", "trace_authz"}
 
-_PROBE_MIGRATION = Migration(2, "probe_table", "CREATE TABLE probe_v2 (x INTEGER);")
+_PROBE_MIGRATION = Migration(3, "probe_table", "CREATE TABLE probe_v3 (x INTEGER);")
 
 _TRACE_COLUMNS = {
     "traces": {
@@ -76,12 +76,12 @@ def _tables(conn: sqlite3.Connection) -> set[str]:
 
 def test_fresh_initialization_creates_schema_and_version(storage_tmp: Path) -> None:
     db_path = storage_tmp / "fresh.db"
-    assert SCHEMA_VERSION == 1
+    assert SCHEMA_VERSION == 2  # v1 Phase 2 baseline + v2 Phase 4 corpus tables
     with closing(initialize_database(db_path)) as conn:
         assert db_path.exists()
         assert db_path.is_relative_to(PROJECT_ROOT)
         assert db_path.drive == PROJECT_ROOT.drive == "D:"
-        assert user_version(conn) == 1
+        assert user_version(conn) == 2
         assert _EXPECTED_TABLES <= _tables(conn)
         assert conn.execute("PRAGMA journal_mode").fetchone()[0] == "wal"
         assert conn.execute("PRAGMA foreign_keys").fetchone()[0] == 1
@@ -92,12 +92,12 @@ def test_repeated_initialization_is_idempotent(storage_tmp: Path) -> None:
     db_path = storage_tmp / "idempotent.db"
     with closing(initialize_database(db_path)) as conn:
         baseline = _tables(conn)
-        assert initialize(conn) == 1
-        assert initialize(conn) == 1
-        assert user_version(conn) == 1
+        assert initialize(conn) == 2
+        assert initialize(conn) == 2
+        assert user_version(conn) == 2
         assert _tables(conn) == baseline
     with closing(initialize_database(db_path)) as conn:  # reopen from disk
-        assert user_version(conn) == 1
+        assert user_version(conn) == 2
         assert _tables(conn) == baseline
 
 
@@ -125,7 +125,9 @@ def test_failed_baseline_migration_rolls_back_completely(storage_tmp: Path) -> N
         assert "traces" in tables  # pre-existing stray object untouched
 
 
-def test_existing_v1_upgrades_without_destructive_reset(storage_tmp: Path) -> None:
+def test_existing_database_upgrades_without_destructive_reset(
+    storage_tmp: Path,
+) -> None:
     db_path = storage_tmp / "upgrade.db"
     with closing(initialize_database(db_path)) as conn:
         conn.execute(
@@ -133,13 +135,13 @@ def test_existing_v1_upgrades_without_destructive_reset(storage_tmp: Path) -> No
             ("r-1", "2026-10-19T00:00:00Z"),
         )
         extended = MIGRATIONS + (_PROBE_MIGRATION,)
-        assert initialize(conn, migrations=extended) == 2
-        assert user_version(conn) == 2
-        assert "probe_v2" in _tables(conn)
+        assert initialize(conn, migrations=extended) == 3
+        assert user_version(conn) == 3
+        assert "probe_v3" in _tables(conn)
         row = conn.execute("SELECT request_id FROM traces WHERE id = 1").fetchone()
-        assert row["request_id"] == "r-1"  # v1 data survived the upgrade
-        assert _EXPECTED_TABLES <= _tables(conn)  # v1 objects intact
-        # The default registry supports v1 only: it refuses a v2 database.
+        assert row["request_id"] == "r-1"  # pre-upgrade data survived
+        assert _EXPECTED_TABLES <= _tables(conn)  # older objects intact
+        # The shipped registry ends at v2: it refuses a newer database.
         with pytest.raises(UnsupportedSchemaVersionError):
             initialize(conn)
 
@@ -149,8 +151,8 @@ def test_fresh_database_with_full_registry_sequence(storage_tmp: Path) -> None:
     with closing(
         initialize_database(storage_tmp / "fresh2.db", migrations=extended)
     ) as conn:
-        assert user_version(conn) == 2
-        assert _EXPECTED_TABLES | {"probe_v2"} <= _tables(conn)
+        assert user_version(conn) == 3
+        assert _EXPECTED_TABLES | {"probe_v3"} <= _tables(conn)
 
 
 def test_invalid_migration_registry_rejected_before_any_statement(
@@ -158,7 +160,7 @@ def test_invalid_migration_registry_rejected_before_any_statement(
 ) -> None:
     with closing(open_db(storage_tmp / "bad_registry.db")) as conn:
         with pytest.raises(MigrationError, match="contiguous"):
-            initialize(conn, migrations=(_PROBE_MIGRATION,))  # starts at v2
+            initialize(conn, migrations=(_PROBE_MIGRATION,))  # starts at v3
         with pytest.raises(MigrationError, match="empty"):
             initialize(conn, migrations=())
         with pytest.raises(MigrationError, match="no SQL"):
@@ -337,7 +339,7 @@ def test_relative_path_resolves_against_project_root_not_cwd(storage_tmp: Path) 
     try:
         os.chdir(elsewhere)  # cwd deliberately NOT the project root
         with closing(initialize_database(relative)) as conn:
-            assert user_version(conn) == 1
+            assert user_version(conn) == 2
         assert (PROJECT_ROOT / relative).exists()  # anchored at root, not cwd
         assert not (elsewhere / relative).exists()
     finally:

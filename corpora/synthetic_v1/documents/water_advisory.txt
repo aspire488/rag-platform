@@ -1,0 +1,810 @@
+# Port Marrow Harbor Water Authority — Advisory Summary (superseded draft)
+
+date: 2025-11-02
+author: Joel (locally authored, deterministic builder)
+
+## Note on provenance
+
+This advisory draft predates the current authority reference (declared 2026-03-12) and quotes several figures that have since changed. It is retained for audit only.
+
+## Superseded figures
+
+The Port Marrow Harbor Water Authority records that the north intake has a peak allocation of 44 MGD (draft revision 2).
+
+The Port Marrow Harbor Water Authority records that the ferry replacement levy has a rate of 0.42 percent (draft revision 3).
+
+The Port Marrow Harbor Water Authority records that the desalination train has a capacity of 18 kiloliters (draft revision 4).
+
+The Port Marrow Harbor Water Authority records that the settlement basin has a count of three (draft revision 5).
+
+The Port Marrow Harbor Water Authority records that the turbidity array has a sensor model of KX-441 (draft revision 6).
+
+## Conflicting claims
+
+As declared on 2025-11-02, the ferry replacement levy rate was 0.38 percent.
+
+(Compare the authority reference declared 2026-03-12, which states 0.42 percent.)
+
+1907-08-08: crew sealed the vault register; two samples were retained (entry 7000).
+1908-03-09: crew indexed the mooring line; the entry was countersigned (entry 7001).
+1909-10-10: crew verified the depot ledger; the band was re-tagged (entry 7002).
+1907-05-11: crew inspected the folio sleeve; the count agreed with the roll (entry 7003).
+1908-12-12: crew logged the muster book; the seal was replaced (entry 7004).
+1909-07-13: crew calibrated the sensor rack; no anomaly recorded (entry 7005).
+1907-02-14: crew reconciled the gauge post; a follow-up was queued (entry 7006).
+1908-09-15: crew archived the press bank; the reading matched the prior week (entry 7007).
+1909-04-16: crew audited the seal row; two samples were retained (entry 7008).
+1907-11-17: crew recorded the intake screen; the entry was countersigned (entry 7009).
+1908-06-18: crew sealed the vault register; the band was re-tagged (entry 7010).
+1909-01-19: crew indexed the mooring line; the count agreed with the roll (entry 7011).
+1907-08-20: crew verified the depot ledger; the seal was replaced (entry 7012).
+1908-03-21: crew inspected the folio sleeve; no anomaly recorded (entry 7013).
+1909-10-22: crew logged the muster book; a follow-up was queued (entry 7014).
+1907-05-23: crew calibrated the sensor rack; the reading matched the prior week (entry 7015).
+1908-12-24: crew reconciled the gauge post; two samples were retained (entry 7016).
+1909-07-25: crew archived the press bank; the entry was countersigned (entry 7017).
+1907-02-26: crew audited the seal row; the band was re-tagged (entry 7018).
+1908-09-27: crew recorded the intake screen; the count agreed with the roll (entry 7019).
+1909-04-28: crew sealed the vault register; the seal was replaced (entry 7020).
+1907-11-01: crew indexed the mooring line; no anomaly recorded (entry 7021).
+1908-06-02: crew verified the depot ledger; a follow-up was queued (entry 7022).
+1909-01-03: crew inspected the folio sleeve; the reading matched the prior week (entry 7023).
+1907-08-04: crew logged the muster book; two samples were retained (entry 7024).
+1908-03-05: crew calibrated the sensor rack; the entry was countersigned (entry 7025).
+1909-10-06: crew reconciled the gauge post; the band was re-tagged (entry 7026).
+1907-05-07: crew archived the press bank; the count agreed with the roll (entry 7027).
+1908-12-08: crew audited the seal row; the seal was replaced (entry 7028).
+1909-07-09: crew recorded the intake screen; no anomaly recorded (entry 7029).
+1907-02-10: crew sealed the vault register; a follow-up was queued (entry 7030).
+1908-09-11: crew indexed the mooring line; the reading matched the prior week (entry 7031).
+1909-04-12: crew verified the depot ledger; two samples were retained (entry 7032).
+1907-11-13: crew inspected the folio sleeve; the entry was countersigned (entry 7033).
+1908-06-14: crew logged the muster book; the band was re-tagged (entry 7034).
+1909-01-15: crew calibrated the sensor rack; the count agreed with the roll (entry 7035).
+1907-08-16: crew reconciled the gauge post; the seal was replaced (entry 7036).
+1908-03-17: crew archived the press bank; no anomaly recorded (entry 7037).
+1909-10-18: crew audited the seal row; a follow-up was queued (entry 7038).
+1907-05-19: crew recorded the intake screen; the reading matched the prior week (entry 7039).
+1908-12-20: crew sealed the vault register; two samples were retained (entry 7040).
+1909-07-21: crew indexed the mooring line; the entry was countersigned (entry 7041).
+1907-02-22: crew verified the depot ledger; the band was re-tagged (entry 7042).
+1908-09-23: crew inspected the folio sleeve; the count agreed with the roll (entry 7043).
+1909-04-24: crew logged the muster book; the seal was replaced (entry 7044).
+1907-11-25: crew calibrated the sensor rack; no anomaly recorded (entry 7045).
+1908-06-26: crew reconciled the gauge post; a follow-up was queued (entry 7046).
+1909-01-27: crew archived the press bank; the reading matched the prior week (entry 7047).
+1907-08-28: crew audited the seal row; two samples were retained (entry 7048).
+1908-03-01: crew recorded the intake screen; the entry was countersigned (entry 7049).
+1909-10-02: crew sealed the vault register; the band was re-tagged (entry 7050).
+1907-05-03: crew indexed the mooring line; the count agreed with the roll (entry 7051).
+1908-12-04: crew verified the depot ledger; the seal was replaced (entry 7052).
+1909-07-05: crew inspected the folio sleeve; no anomaly recorded (entry 7053).
+1907-02-06: crew logged the muster book; a follow-up was queued (entry 7054).
+1908-09-07: crew calibrated the sensor rack; the reading matched the prior week (entry 7055).
+1909-04-08: crew reconciled the gauge post; two samples were retained (entry 7056).
+1907-11-09: crew archived the press bank; the entry was countersigned (entry 7057).
+1908-06-10: crew audited the seal row; the band was re-tagged (entry 7058).
+1909-01-11: crew recorded the intake screen; the count agreed with the roll (entry 7059).
+1907-08-12: crew sealed the vault register; the seal was replaced (entry 7060).
+1908-03-13: crew indexed the mooring line; no anomaly recorded (entry 7061).
+1909-10-14: crew verified the depot ledger; a follow-up was queued (entry 7062).
+1907-05-15: crew inspected the folio sleeve; the reading matched the prior week (entry 7063).
+1908-12-16: crew logged the muster book; two samples were retained (entry 7064).
+1909-07-17: crew calibrated the sensor rack; the entry was countersigned (entry 7065).
+1907-02-18: crew reconciled the gauge post; the band was re-tagged (entry 7066).
+1908-09-19: crew archived the press bank; the count agreed with the roll (entry 7067).
+1909-04-20: crew audited the seal row; the seal was replaced (entry 7068).
+1907-11-21: crew recorded the intake screen; no anomaly recorded (entry 7069).
+1908-06-22: crew sealed the vault register; a follow-up was queued (entry 7070).
+1909-01-23: crew indexed the mooring line; the reading matched the prior week (entry 7071).
+1907-08-24: crew verified the depot ledger; two samples were retained (entry 7072).
+1908-03-25: crew inspected the folio sleeve; the entry was countersigned (entry 7073).
+1909-10-26: crew logged the muster book; the band was re-tagged (entry 7074).
+1907-05-27: crew calibrated the sensor rack; the count agreed with the roll (entry 7075).
+1908-12-28: crew reconciled the gauge post; the seal was replaced (entry 7076).
+1909-07-01: crew archived the press bank; no anomaly recorded (entry 7077).
+1907-02-02: crew audited the seal row; a follow-up was queued (entry 7078).
+1908-09-03: crew recorded the intake screen; the reading matched the prior week (entry 7079).
+1909-04-04: crew sealed the vault register; two samples were retained (entry 7080).
+1907-11-05: crew indexed the mooring line; the entry was countersigned (entry 7081).
+1908-06-06: crew verified the depot ledger; the band was re-tagged (entry 7082).
+1909-01-07: crew inspected the folio sleeve; the count agreed with the roll (entry 7083).
+1907-08-08: crew logged the muster book; the seal was replaced (entry 7084).
+1908-03-09: crew calibrated the sensor rack; no anomaly recorded (entry 7085).
+1909-10-10: crew reconciled the gauge post; a follow-up was queued (entry 7086).
+1907-05-11: crew archived the press bank; the reading matched the prior week (entry 7087).
+1908-12-12: crew audited the seal row; two samples were retained (entry 7088).
+1909-07-13: crew recorded the intake screen; the entry was countersigned (entry 7089).
+1907-02-14: crew sealed the vault register; the band was re-tagged (entry 7090).
+1908-09-15: crew indexed the mooring line; the count agreed with the roll (entry 7091).
+1909-04-16: crew verified the depot ledger; the seal was replaced (entry 7092).
+1907-11-17: crew inspected the folio sleeve; no anomaly recorded (entry 7093).
+1908-06-18: crew logged the muster book; a follow-up was queued (entry 7094).
+1909-01-19: crew calibrated the sensor rack; the reading matched the prior week (entry 7095).
+1907-08-20: crew reconciled the gauge post; two samples were retained (entry 7096).
+1908-03-21: crew archived the press bank; the entry was countersigned (entry 7097).
+1909-10-22: crew audited the seal row; the band was re-tagged (entry 7098).
+1907-05-23: crew recorded the intake screen; the count agreed with the roll (entry 7099).
+1908-12-24: crew sealed the vault register; the seal was replaced (entry 7100).
+1909-07-25: crew indexed the mooring line; no anomaly recorded (entry 7101).
+1907-02-26: crew verified the depot ledger; a follow-up was queued (entry 7102).
+1908-09-27: crew inspected the folio sleeve; the reading matched the prior week (entry 7103).
+1909-04-28: crew logged the muster book; two samples were retained (entry 7104).
+1907-11-01: crew calibrated the sensor rack; the entry was countersigned (entry 7105).
+1908-06-02: crew reconciled the gauge post; the band was re-tagged (entry 7106).
+1909-01-03: crew archived the press bank; the count agreed with the roll (entry 7107).
+1907-08-04: crew audited the seal row; the seal was replaced (entry 7108).
+1908-03-05: crew recorded the intake screen; no anomaly recorded (entry 7109).
+1909-10-06: crew sealed the vault register; a follow-up was queued (entry 7110).
+1907-05-07: crew indexed the mooring line; the reading matched the prior week (entry 7111).
+1908-12-08: crew verified the depot ledger; two samples were retained (entry 7112).
+1909-07-09: crew inspected the folio sleeve; the entry was countersigned (entry 7113).
+1907-02-10: crew logged the muster book; the band was re-tagged (entry 7114).
+1908-09-11: crew calibrated the sensor rack; the count agreed with the roll (entry 7115).
+1909-04-12: crew reconciled the gauge post; the seal was replaced (entry 7116).
+1907-11-13: crew archived the press bank; no anomaly recorded (entry 7117).
+1908-06-14: crew audited the seal row; a follow-up was queued (entry 7118).
+1909-01-15: crew recorded the intake screen; the reading matched the prior week (entry 7119).
+1907-08-16: crew sealed the vault register; two samples were retained (entry 7120).
+1908-03-17: crew indexed the mooring line; the entry was countersigned (entry 7121).
+1909-10-18: crew verified the depot ledger; the band was re-tagged (entry 7122).
+1907-05-19: crew inspected the folio sleeve; the count agreed with the roll (entry 7123).
+1908-12-20: crew logged the muster book; the seal was replaced (entry 7124).
+1909-07-21: crew calibrated the sensor rack; no anomaly recorded (entry 7125).
+1907-02-22: crew reconciled the gauge post; a follow-up was queued (entry 7126).
+1908-09-23: crew archived the press bank; the reading matched the prior week (entry 7127).
+1909-04-24: crew audited the seal row; two samples were retained (entry 7128).
+1907-11-25: crew recorded the intake screen; the entry was countersigned (entry 7129).
+1908-06-26: crew sealed the vault register; the band was re-tagged (entry 7130).
+1909-01-27: crew indexed the mooring line; the count agreed with the roll (entry 7131).
+1907-08-28: crew verified the depot ledger; the seal was replaced (entry 7132).
+1908-03-01: crew inspected the folio sleeve; no anomaly recorded (entry 7133).
+1909-10-02: crew logged the muster book; a follow-up was queued (entry 7134).
+1907-05-03: crew calibrated the sensor rack; the reading matched the prior week (entry 7135).
+1908-12-04: crew reconciled the gauge post; two samples were retained (entry 7136).
+1909-07-05: crew archived the press bank; the entry was countersigned (entry 7137).
+1907-02-06: crew audited the seal row; the band was re-tagged (entry 7138).
+1908-09-07: crew recorded the intake screen; the count agreed with the roll (entry 7139).
+1909-04-08: crew sealed the vault register; the seal was replaced (entry 7140).
+1907-11-09: crew indexed the mooring line; no anomaly recorded (entry 7141).
+1908-06-10: crew verified the depot ledger; a follow-up was queued (entry 7142).
+1909-01-11: crew inspected the folio sleeve; the reading matched the prior week (entry 7143).
+1907-08-12: crew logged the muster book; two samples were retained (entry 7144).
+1908-03-13: crew calibrated the sensor rack; the entry was countersigned (entry 7145).
+1909-10-14: crew reconciled the gauge post; the band was re-tagged (entry 7146).
+1907-05-15: crew archived the press bank; the count agreed with the roll (entry 7147).
+1908-12-16: crew audited the seal row; the seal was replaced (entry 7148).
+1909-07-17: crew recorded the intake screen; no anomaly recorded (entry 7149).
+1907-02-18: crew sealed the vault register; a follow-up was queued (entry 7150).
+1908-09-19: crew indexed the mooring line; the reading matched the prior week (entry 7151).
+1909-04-20: crew verified the depot ledger; two samples were retained (entry 7152).
+1907-11-21: crew inspected the folio sleeve; the entry was countersigned (entry 7153).
+1908-06-22: crew logged the muster book; the band was re-tagged (entry 7154).
+1909-01-23: crew calibrated the sensor rack; the count agreed with the roll (entry 7155).
+1907-08-24: crew reconciled the gauge post; the seal was replaced (entry 7156).
+1908-03-25: crew archived the press bank; no anomaly recorded (entry 7157).
+1909-10-26: crew audited the seal row; a follow-up was queued (entry 7158).
+1907-05-27: crew recorded the intake screen; the reading matched the prior week (entry 7159).
+1908-12-28: crew sealed the vault register; two samples were retained (entry 7160).
+1909-07-01: crew indexed the mooring line; the entry was countersigned (entry 7161).
+1907-02-02: crew verified the depot ledger; the band was re-tagged (entry 7162).
+1908-09-03: crew inspected the folio sleeve; the count agreed with the roll (entry 7163).
+1909-04-04: crew logged the muster book; the seal was replaced (entry 7164).
+1907-11-05: crew calibrated the sensor rack; no anomaly recorded (entry 7165).
+1908-06-06: crew reconciled the gauge post; a follow-up was queued (entry 7166).
+1909-01-07: crew archived the press bank; the reading matched the prior week (entry 7167).
+1907-08-08: crew audited the seal row; two samples were retained (entry 7168).
+1908-03-09: crew recorded the intake screen; the entry was countersigned (entry 7169).
+1909-10-10: crew sealed the vault register; the band was re-tagged (entry 7170).
+1907-05-11: crew indexed the mooring line; the count agreed with the roll (entry 7171).
+1908-12-12: crew verified the depot ledger; the seal was replaced (entry 7172).
+1909-07-13: crew inspected the folio sleeve; no anomaly recorded (entry 7173).
+1907-02-14: crew logged the muster book; a follow-up was queued (entry 7174).
+1908-09-15: crew calibrated the sensor rack; the reading matched the prior week (entry 7175).
+1909-04-16: crew reconciled the gauge post; two samples were retained (entry 7176).
+1907-11-17: crew archived the press bank; the entry was countersigned (entry 7177).
+1908-06-18: crew audited the seal row; the band was re-tagged (entry 7178).
+1909-01-19: crew recorded the intake screen; the count agreed with the roll (entry 7179).
+1907-08-20: crew sealed the vault register; the seal was replaced (entry 7180).
+1908-03-21: crew indexed the mooring line; no anomaly recorded (entry 7181).
+1909-10-22: crew verified the depot ledger; a follow-up was queued (entry 7182).
+1907-05-23: crew inspected the folio sleeve; the reading matched the prior week (entry 7183).
+1908-12-24: crew logged the muster book; two samples were retained (entry 7184).
+1909-07-25: crew calibrated the sensor rack; the entry was countersigned (entry 7185).
+1907-02-26: crew reconciled the gauge post; the band was re-tagged (entry 7186).
+1908-09-27: crew archived the press bank; the count agreed with the roll (entry 7187).
+1909-04-28: crew audited the seal row; the seal was replaced (entry 7188).
+1907-11-01: crew recorded the intake screen; no anomaly recorded (entry 7189).
+1908-06-02: crew sealed the vault register; a follow-up was queued (entry 7190).
+1909-01-03: crew indexed the mooring line; the reading matched the prior week (entry 7191).
+1907-08-04: crew verified the depot ledger; two samples were retained (entry 7192).
+1908-03-05: crew inspected the folio sleeve; the entry was countersigned (entry 7193).
+1909-10-06: crew logged the muster book; the band was re-tagged (entry 7194).
+1907-05-07: crew calibrated the sensor rack; the count agreed with the roll (entry 7195).
+1908-12-08: crew reconciled the gauge post; the seal was replaced (entry 7196).
+1909-07-09: crew archived the press bank; no anomaly recorded (entry 7197).
+1907-02-10: crew audited the seal row; a follow-up was queued (entry 7198).
+1908-09-11: crew recorded the intake screen; the reading matched the prior week (entry 7199).
+1909-04-12: crew sealed the vault register; two samples were retained (entry 7200).
+1907-11-13: crew indexed the mooring line; the entry was countersigned (entry 7201).
+1908-06-14: crew verified the depot ledger; the band was re-tagged (entry 7202).
+1909-01-15: crew inspected the folio sleeve; the count agreed with the roll (entry 7203).
+1907-08-16: crew logged the muster book; the seal was replaced (entry 7204).
+1908-03-17: crew calibrated the sensor rack; no anomaly recorded (entry 7205).
+1909-10-18: crew reconciled the gauge post; a follow-up was queued (entry 7206).
+1907-05-19: crew archived the press bank; the reading matched the prior week (entry 7207).
+1908-12-20: crew audited the seal row; two samples were retained (entry 7208).
+1909-07-21: crew recorded the intake screen; the entry was countersigned (entry 7209).
+1907-02-22: crew sealed the vault register; the band was re-tagged (entry 7210).
+1908-09-23: crew indexed the mooring line; the count agreed with the roll (entry 7211).
+1909-04-24: crew verified the depot ledger; the seal was replaced (entry 7212).
+1907-11-25: crew inspected the folio sleeve; no anomaly recorded (entry 7213).
+1908-06-26: crew logged the muster book; a follow-up was queued (entry 7214).
+1909-01-27: crew calibrated the sensor rack; the reading matched the prior week (entry 7215).
+1907-08-28: crew reconciled the gauge post; two samples were retained (entry 7216).
+1908-03-01: crew archived the press bank; the entry was countersigned (entry 7217).
+1909-10-02: crew audited the seal row; the band was re-tagged (entry 7218).
+1907-05-03: crew recorded the intake screen; the count agreed with the roll (entry 7219).
+1908-12-04: crew sealed the vault register; the seal was replaced (entry 7220).
+1909-07-05: crew indexed the mooring line; no anomaly recorded (entry 7221).
+1907-02-06: crew verified the depot ledger; a follow-up was queued (entry 7222).
+1908-09-07: crew inspected the folio sleeve; the reading matched the prior week (entry 7223).
+1909-04-08: crew logged the muster book; two samples were retained (entry 7224).
+1907-11-09: crew calibrated the sensor rack; the entry was countersigned (entry 7225).
+1908-06-10: crew reconciled the gauge post; the band was re-tagged (entry 7226).
+1909-01-11: crew archived the press bank; the count agreed with the roll (entry 7227).
+1907-08-12: crew audited the seal row; the seal was replaced (entry 7228).
+1908-03-13: crew recorded the intake screen; no anomaly recorded (entry 7229).
+1909-10-14: crew sealed the vault register; a follow-up was queued (entry 7230).
+1907-05-15: crew indexed the mooring line; the reading matched the prior week (entry 7231).
+1908-12-16: crew verified the depot ledger; two samples were retained (entry 7232).
+1909-07-17: crew inspected the folio sleeve; the entry was countersigned (entry 7233).
+1907-02-18: crew logged the muster book; the band was re-tagged (entry 7234).
+1908-09-19: crew calibrated the sensor rack; the count agreed with the roll (entry 7235).
+1909-04-20: crew reconciled the gauge post; the seal was replaced (entry 7236).
+1907-11-21: crew archived the press bank; no anomaly recorded (entry 7237).
+1908-06-22: crew audited the seal row; a follow-up was queued (entry 7238).
+1909-01-23: crew recorded the intake screen; the reading matched the prior week (entry 7239).
+
+## Appendix (operational log)
+
+1944-09-17: crew archived the mooring line; the entry was countersigned (entry 44000).
+1945-04-18: crew audited the depot ledger; the band was re-tagged (entry 44001).
+1946-11-19: crew recorded the folio sleeve; the count agreed with the roll (entry 44002).
+1944-06-20: crew sealed the muster book; the seal was replaced (entry 44003).
+1945-01-21: crew indexed the sensor rack; no anomaly recorded (entry 44004).
+1946-08-22: crew verified the gauge post; a follow-up was queued (entry 44005).
+1944-03-23: crew inspected the press bank; the reading matched the prior week (entry 44006).
+1945-10-24: crew logged the seal row; two samples were retained (entry 44007).
+1946-05-25: crew calibrated the intake screen; the entry was countersigned (entry 44008).
+1944-12-26: crew reconciled the vault register; the band was re-tagged (entry 44009).
+1945-07-27: crew archived the mooring line; the count agreed with the roll (entry 44010).
+1946-02-28: crew audited the depot ledger; the seal was replaced (entry 44011).
+1944-09-01: crew recorded the folio sleeve; no anomaly recorded (entry 44012).
+1945-04-02: crew sealed the muster book; a follow-up was queued (entry 44013).
+1946-11-03: crew indexed the sensor rack; the reading matched the prior week (entry 44014).
+1944-06-04: crew verified the gauge post; two samples were retained (entry 44015).
+1945-01-05: crew inspected the press bank; the entry was countersigned (entry 44016).
+1946-08-06: crew logged the seal row; the band was re-tagged (entry 44017).
+1944-03-07: crew calibrated the intake screen; the count agreed with the roll (entry 44018).
+1945-10-08: crew reconciled the vault register; the seal was replaced (entry 44019).
+1946-05-09: crew archived the mooring line; no anomaly recorded (entry 44020).
+1944-12-10: crew audited the depot ledger; a follow-up was queued (entry 44021).
+1945-07-11: crew recorded the folio sleeve; the reading matched the prior week (entry 44022).
+1946-02-12: crew sealed the muster book; two samples were retained (entry 44023).
+1944-09-13: crew indexed the sensor rack; the entry was countersigned (entry 44024).
+1945-04-14: crew verified the gauge post; the band was re-tagged (entry 44025).
+1946-11-15: crew inspected the press bank; the count agreed with the roll (entry 44026).
+1944-06-16: crew logged the seal row; the seal was replaced (entry 44027).
+1945-01-17: crew calibrated the intake screen; no anomaly recorded (entry 44028).
+1946-08-18: crew reconciled the vault register; a follow-up was queued (entry 44029).
+1944-03-19: crew archived the mooring line; the reading matched the prior week (entry 44030).
+1945-10-20: crew audited the depot ledger; two samples were retained (entry 44031).
+1946-05-21: crew recorded the folio sleeve; the entry was countersigned (entry 44032).
+1944-12-22: crew sealed the muster book; the band was re-tagged (entry 44033).
+1945-07-23: crew indexed the sensor rack; the count agreed with the roll (entry 44034).
+1946-02-24: crew verified the gauge post; the seal was replaced (entry 44035).
+1944-09-25: crew inspected the press bank; no anomaly recorded (entry 44036).
+1945-04-26: crew logged the seal row; a follow-up was queued (entry 44037).
+1946-11-27: crew calibrated the intake screen; the reading matched the prior week (entry 44038).
+1944-06-28: crew reconciled the vault register; two samples were retained (entry 44039).
+1945-01-01: crew archived the mooring line; the entry was countersigned (entry 44040).
+1946-08-02: crew audited the depot ledger; the band was re-tagged (entry 44041).
+1944-03-03: crew recorded the folio sleeve; the count agreed with the roll (entry 44042).
+1945-10-04: crew sealed the muster book; the seal was replaced (entry 44043).
+1946-05-05: crew indexed the sensor rack; no anomaly recorded (entry 44044).
+1944-12-06: crew verified the gauge post; a follow-up was queued (entry 44045).
+1945-07-07: crew inspected the press bank; the reading matched the prior week (entry 44046).
+1946-02-08: crew logged the seal row; two samples were retained (entry 44047).
+1944-09-09: crew calibrated the intake screen; the entry was countersigned (entry 44048).
+1945-04-10: crew reconciled the vault register; the band was re-tagged (entry 44049).
+1946-11-11: crew archived the mooring line; the count agreed with the roll (entry 44050).
+1944-06-12: crew audited the depot ledger; the seal was replaced (entry 44051).
+1945-01-13: crew recorded the folio sleeve; no anomaly recorded (entry 44052).
+1946-08-14: crew sealed the muster book; a follow-up was queued (entry 44053).
+1944-03-15: crew indexed the sensor rack; the reading matched the prior week (entry 44054).
+1945-10-16: crew verified the gauge post; two samples were retained (entry 44055).
+1946-05-17: crew inspected the press bank; the entry was countersigned (entry 44056).
+1944-12-18: crew logged the seal row; the band was re-tagged (entry 44057).
+1945-07-19: crew calibrated the intake screen; the count agreed with the roll (entry 44058).
+1946-02-20: crew reconciled the vault register; the seal was replaced (entry 44059).
+1955-08-28: crew audited the muster book; two samples were retained (entry 55000).
+1956-03-01: crew recorded the sensor rack; the entry was countersigned (entry 55001).
+1957-10-02: crew sealed the gauge post; the band was re-tagged (entry 55002).
+1955-05-03: crew indexed the press bank; the count agreed with the roll (entry 55003).
+1956-12-04: crew verified the seal row; the seal was replaced (entry 55004).
+1957-07-05: crew inspected the intake screen; no anomaly recorded (entry 55005).
+1955-02-06: crew logged the vault register; a follow-up was queued (entry 55006).
+1956-09-07: crew calibrated the mooring line; the reading matched the prior week (entry 55007).
+1957-04-08: crew reconciled the depot ledger; two samples were retained (entry 55008).
+1955-11-09: crew archived the folio sleeve; the entry was countersigned (entry 55009).
+1956-06-10: crew audited the muster book; the band was re-tagged (entry 55010).
+1957-01-11: crew recorded the sensor rack; the count agreed with the roll (entry 55011).
+1955-08-12: crew sealed the gauge post; the seal was replaced (entry 55012).
+1956-03-13: crew indexed the press bank; no anomaly recorded (entry 55013).
+1957-10-14: crew verified the seal row; a follow-up was queued (entry 55014).
+1955-05-15: crew inspected the intake screen; the reading matched the prior week (entry 55015).
+1956-12-16: crew logged the vault register; two samples were retained (entry 55016).
+1957-07-17: crew calibrated the mooring line; the entry was countersigned (entry 55017).
+1955-02-18: crew reconciled the depot ledger; the band was re-tagged (entry 55018).
+1956-09-19: crew archived the folio sleeve; the count agreed with the roll (entry 55019).
+1957-04-20: crew audited the muster book; the seal was replaced (entry 55020).
+1955-11-21: crew recorded the sensor rack; no anomaly recorded (entry 55021).
+1956-06-22: crew sealed the gauge post; a follow-up was queued (entry 55022).
+1957-01-23: crew indexed the press bank; the reading matched the prior week (entry 55023).
+1955-08-24: crew verified the seal row; two samples were retained (entry 55024).
+1956-03-25: crew inspected the intake screen; the entry was countersigned (entry 55025).
+1957-10-26: crew logged the vault register; the band was re-tagged (entry 55026).
+1955-05-27: crew calibrated the mooring line; the count agreed with the roll (entry 55027).
+1956-12-28: crew reconciled the depot ledger; the seal was replaced (entry 55028).
+1957-07-01: crew archived the folio sleeve; no anomaly recorded (entry 55029).
+1955-02-02: crew audited the muster book; a follow-up was queued (entry 55030).
+1956-09-03: crew recorded the sensor rack; the reading matched the prior week (entry 55031).
+1957-04-04: crew sealed the gauge post; two samples were retained (entry 55032).
+1955-11-05: crew indexed the press bank; the entry was countersigned (entry 55033).
+1956-06-06: crew verified the seal row; the band was re-tagged (entry 55034).
+1957-01-07: crew inspected the intake screen; the count agreed with the roll (entry 55035).
+1955-08-08: crew logged the vault register; the seal was replaced (entry 55036).
+1956-03-09: crew calibrated the mooring line; no anomaly recorded (entry 55037).
+1957-10-10: crew reconciled the depot ledger; a follow-up was queued (entry 55038).
+1955-05-11: crew archived the folio sleeve; the reading matched the prior week (entry 55039).
+1956-12-12: crew audited the muster book; two samples were retained (entry 55040).
+1957-07-13: crew recorded the sensor rack; the entry was countersigned (entry 55041).
+1955-02-14: crew sealed the gauge post; the band was re-tagged (entry 55042).
+1956-09-15: crew indexed the press bank; the count agreed with the roll (entry 55043).
+1957-04-16: crew verified the seal row; the seal was replaced (entry 55044).
+1955-11-17: crew inspected the intake screen; no anomaly recorded (entry 55045).
+1956-06-18: crew logged the vault register; a follow-up was queued (entry 55046).
+1957-01-19: crew calibrated the mooring line; the reading matched the prior week (entry 55047).
+1955-08-20: crew reconciled the depot ledger; two samples were retained (entry 55048).
+1956-03-21: crew archived the folio sleeve; the entry was countersigned (entry 55049).
+1957-10-22: crew audited the muster book; the band was re-tagged (entry 55050).
+1955-05-23: crew recorded the sensor rack; the count agreed with the roll (entry 55051).
+1956-12-24: crew sealed the gauge post; the seal was replaced (entry 55052).
+1957-07-25: crew indexed the press bank; no anomaly recorded (entry 55053).
+1955-02-26: crew verified the seal row; a follow-up was queued (entry 55054).
+1956-09-27: crew inspected the intake screen; the reading matched the prior week (entry 55055).
+1957-04-28: crew logged the vault register; two samples were retained (entry 55056).
+1955-11-01: crew calibrated the mooring line; the entry was countersigned (entry 55057).
+1956-06-02: crew reconciled the depot ledger; the band was re-tagged (entry 55058).
+1957-01-03: crew archived the folio sleeve; the count agreed with the roll (entry 55059).
+1966-07-11: crew recorded the press bank; the reading matched the prior week (entry 66000).
+1967-02-12: crew sealed the seal row; two samples were retained (entry 66001).
+1968-09-13: crew indexed the intake screen; the entry was countersigned (entry 66002).
+1966-04-14: crew verified the vault register; the band was re-tagged (entry 66003).
+1967-11-15: crew inspected the mooring line; the count agreed with the roll (entry 66004).
+1968-06-16: crew logged the depot ledger; the seal was replaced (entry 66005).
+1966-01-17: crew calibrated the folio sleeve; no anomaly recorded (entry 66006).
+1967-08-18: crew reconciled the muster book; a follow-up was queued (entry 66007).
+1968-03-19: crew archived the sensor rack; the reading matched the prior week (entry 66008).
+1966-10-20: crew audited the gauge post; two samples were retained (entry 66009).
+1967-05-21: crew recorded the press bank; the entry was countersigned (entry 66010).
+1968-12-22: crew sealed the seal row; the band was re-tagged (entry 66011).
+1966-07-23: crew indexed the intake screen; the count agreed with the roll (entry 66012).
+1967-02-24: crew verified the vault register; the seal was replaced (entry 66013).
+1968-09-25: crew inspected the mooring line; no anomaly recorded (entry 66014).
+1966-04-26: crew logged the depot ledger; a follow-up was queued (entry 66015).
+1967-11-27: crew calibrated the folio sleeve; the reading matched the prior week (entry 66016).
+1968-06-28: crew reconciled the muster book; two samples were retained (entry 66017).
+1966-01-01: crew archived the sensor rack; the entry was countersigned (entry 66018).
+1967-08-02: crew audited the gauge post; the band was re-tagged (entry 66019).
+1968-03-03: crew recorded the press bank; the count agreed with the roll (entry 66020).
+1966-10-04: crew sealed the seal row; the seal was replaced (entry 66021).
+1967-05-05: crew indexed the intake screen; no anomaly recorded (entry 66022).
+1968-12-06: crew verified the vault register; a follow-up was queued (entry 66023).
+1966-07-07: crew inspected the mooring line; the reading matched the prior week (entry 66024).
+1967-02-08: crew logged the depot ledger; two samples were retained (entry 66025).
+1968-09-09: crew calibrated the folio sleeve; the entry was countersigned (entry 66026).
+1966-04-10: crew reconciled the muster book; the band was re-tagged (entry 66027).
+1967-11-11: crew archived the sensor rack; the count agreed with the roll (entry 66028).
+1968-06-12: crew audited the gauge post; the seal was replaced (entry 66029).
+1966-01-13: crew recorded the press bank; no anomaly recorded (entry 66030).
+1967-08-14: crew sealed the seal row; a follow-up was queued (entry 66031).
+1968-03-15: crew indexed the intake screen; the reading matched the prior week (entry 66032).
+1966-10-16: crew verified the vault register; two samples were retained (entry 66033).
+1967-05-17: crew inspected the mooring line; the entry was countersigned (entry 66034).
+1968-12-18: crew logged the depot ledger; the band was re-tagged (entry 66035).
+1966-07-19: crew calibrated the folio sleeve; the count agreed with the roll (entry 66036).
+1967-02-20: crew reconciled the muster book; the seal was replaced (entry 66037).
+1968-09-21: crew archived the sensor rack; no anomaly recorded (entry 66038).
+1966-04-22: crew audited the gauge post; a follow-up was queued (entry 66039).
+1967-11-23: crew recorded the press bank; the reading matched the prior week (entry 66040).
+1968-06-24: crew sealed the seal row; two samples were retained (entry 66041).
+1966-01-25: crew indexed the intake screen; the entry was countersigned (entry 66042).
+1967-08-26: crew verified the vault register; the band was re-tagged (entry 66043).
+1968-03-27: crew inspected the mooring line; the count agreed with the roll (entry 66044).
+1966-10-28: crew logged the depot ledger; the seal was replaced (entry 66045).
+1967-05-01: crew calibrated the folio sleeve; no anomaly recorded (entry 66046).
+1968-12-02: crew reconciled the muster book; a follow-up was queued (entry 66047).
+1966-07-03: crew archived the sensor rack; the reading matched the prior week (entry 66048).
+1967-02-04: crew audited the gauge post; two samples were retained (entry 66049).
+1968-09-05: crew recorded the press bank; the entry was countersigned (entry 66050).
+1966-04-06: crew sealed the seal row; the band was re-tagged (entry 66051).
+1967-11-07: crew indexed the intake screen; the count agreed with the roll (entry 66052).
+1968-06-08: crew verified the vault register; the seal was replaced (entry 66053).
+1966-01-09: crew inspected the mooring line; no anomaly recorded (entry 66054).
+1967-08-10: crew logged the depot ledger; a follow-up was queued (entry 66055).
+1968-03-11: crew calibrated the folio sleeve; the reading matched the prior week (entry 66056).
+1966-10-12: crew reconciled the muster book; two samples were retained (entry 66057).
+1967-05-13: crew archived the sensor rack; the entry was countersigned (entry 66058).
+1968-12-14: crew audited the gauge post; the band was re-tagged (entry 66059).
+1977-06-22: crew sealed the vault register; a follow-up was queued (entry 77000).
+1978-01-23: crew indexed the mooring line; the reading matched the prior week (entry 77001).
+1979-08-24: crew verified the depot ledger; two samples were retained (entry 77002).
+1977-03-25: crew inspected the folio sleeve; the entry was countersigned (entry 77003).
+1978-10-26: crew logged the muster book; the band was re-tagged (entry 77004).
+1979-05-27: crew calibrated the sensor rack; the count agreed with the roll (entry 77005).
+1977-12-28: crew reconciled the gauge post; the seal was replaced (entry 77006).
+1978-07-01: crew archived the press bank; no anomaly recorded (entry 77007).
+1979-02-02: crew audited the seal row; a follow-up was queued (entry 77008).
+1977-09-03: crew recorded the intake screen; the reading matched the prior week (entry 77009).
+1978-04-04: crew sealed the vault register; two samples were retained (entry 77010).
+1979-11-05: crew indexed the mooring line; the entry was countersigned (entry 77011).
+1977-06-06: crew verified the depot ledger; the band was re-tagged (entry 77012).
+1978-01-07: crew inspected the folio sleeve; the count agreed with the roll (entry 77013).
+1979-08-08: crew logged the muster book; the seal was replaced (entry 77014).
+1977-03-09: crew calibrated the sensor rack; no anomaly recorded (entry 77015).
+1978-10-10: crew reconciled the gauge post; a follow-up was queued (entry 77016).
+1979-05-11: crew archived the press bank; the reading matched the prior week (entry 77017).
+1977-12-12: crew audited the seal row; two samples were retained (entry 77018).
+1978-07-13: crew recorded the intake screen; the entry was countersigned (entry 77019).
+1979-02-14: crew sealed the vault register; the band was re-tagged (entry 77020).
+1977-09-15: crew indexed the mooring line; the count agreed with the roll (entry 77021).
+1978-04-16: crew verified the depot ledger; the seal was replaced (entry 77022).
+1979-11-17: crew inspected the folio sleeve; no anomaly recorded (entry 77023).
+1977-06-18: crew logged the muster book; a follow-up was queued (entry 77024).
+1978-01-19: crew calibrated the sensor rack; the reading matched the prior week (entry 77025).
+1979-08-20: crew reconciled the gauge post; two samples were retained (entry 77026).
+1977-03-21: crew archived the press bank; the entry was countersigned (entry 77027).
+1978-10-22: crew audited the seal row; the band was re-tagged (entry 77028).
+1979-05-23: crew recorded the intake screen; the count agreed with the roll (entry 77029).
+1977-12-24: crew sealed the vault register; the seal was replaced (entry 77030).
+1978-07-25: crew indexed the mooring line; no anomaly recorded (entry 77031).
+1979-02-26: crew verified the depot ledger; a follow-up was queued (entry 77032).
+1977-09-27: crew inspected the folio sleeve; the reading matched the prior week (entry 77033).
+1978-04-28: crew logged the muster book; two samples were retained (entry 77034).
+1979-11-01: crew calibrated the sensor rack; the entry was countersigned (entry 77035).
+1977-06-02: crew reconciled the gauge post; the band was re-tagged (entry 77036).
+1978-01-03: crew archived the press bank; the count agreed with the roll (entry 77037).
+1979-08-04: crew audited the seal row; the seal was replaced (entry 77038).
+1977-03-05: crew recorded the intake screen; no anomaly recorded (entry 77039).
+1978-10-06: crew sealed the vault register; a follow-up was queued (entry 77040).
+1979-05-07: crew indexed the mooring line; the reading matched the prior week (entry 77041).
+1977-12-08: crew verified the depot ledger; two samples were retained (entry 77042).
+1978-07-09: crew inspected the folio sleeve; the entry was countersigned (entry 77043).
+1979-02-10: crew logged the muster book; the band was re-tagged (entry 77044).
+1977-09-11: crew calibrated the sensor rack; the count agreed with the roll (entry 77045).
+1978-04-12: crew reconciled the gauge post; the seal was replaced (entry 77046).
+1979-11-13: crew archived the press bank; no anomaly recorded (entry 77047).
+1977-06-14: crew audited the seal row; a follow-up was queued (entry 77048).
+1978-01-15: crew recorded the intake screen; the reading matched the prior week (entry 77049).
+1979-08-16: crew sealed the vault register; two samples were retained (entry 77050).
+1977-03-17: crew indexed the mooring line; the entry was countersigned (entry 77051).
+1978-10-18: crew verified the depot ledger; the band was re-tagged (entry 77052).
+1979-05-19: crew inspected the folio sleeve; the count agreed with the roll (entry 77053).
+1977-12-20: crew logged the muster book; the seal was replaced (entry 77054).
+1978-07-21: crew calibrated the sensor rack; no anomaly recorded (entry 77055).
+1979-02-22: crew reconciled the gauge post; a follow-up was queued (entry 77056).
+1977-09-23: crew archived the press bank; the reading matched the prior week (entry 77057).
+1978-04-24: crew audited the seal row; two samples were retained (entry 77058).
+1979-11-25: crew recorded the intake screen; the entry was countersigned (entry 77059).
+1988-05-05: crew indexed the folio sleeve; no anomaly recorded (entry 88000).
+1989-12-06: crew verified the muster book; a follow-up was queued (entry 88001).
+1990-07-07: crew inspected the sensor rack; the reading matched the prior week (entry 88002).
+1988-02-08: crew logged the gauge post; two samples were retained (entry 88003).
+1989-09-09: crew calibrated the press bank; the entry was countersigned (entry 88004).
+1990-04-10: crew reconciled the seal row; the band was re-tagged (entry 88005).
+1988-11-11: crew archived the intake screen; the count agreed with the roll (entry 88006).
+1989-06-12: crew audited the vault register; the seal was replaced (entry 88007).
+1990-01-13: crew recorded the mooring line; no anomaly recorded (entry 88008).
+1988-08-14: crew sealed the depot ledger; a follow-up was queued (entry 88009).
+1989-03-15: crew indexed the folio sleeve; the reading matched the prior week (entry 88010).
+1990-10-16: crew verified the muster book; two samples were retained (entry 88011).
+1988-05-17: crew inspected the sensor rack; the entry was countersigned (entry 88012).
+1989-12-18: crew logged the gauge post; the band was re-tagged (entry 88013).
+1990-07-19: crew calibrated the press bank; the count agreed with the roll (entry 88014).
+1988-02-20: crew reconciled the seal row; the seal was replaced (entry 88015).
+1989-09-21: crew archived the intake screen; no anomaly recorded (entry 88016).
+1990-04-22: crew audited the vault register; a follow-up was queued (entry 88017).
+1988-11-23: crew recorded the mooring line; the reading matched the prior week (entry 88018).
+1989-06-24: crew sealed the depot ledger; two samples were retained (entry 88019).
+1990-01-25: crew indexed the folio sleeve; the entry was countersigned (entry 88020).
+1988-08-26: crew verified the muster book; the band was re-tagged (entry 88021).
+1989-03-27: crew inspected the sensor rack; the count agreed with the roll (entry 88022).
+1990-10-28: crew logged the gauge post; the seal was replaced (entry 88023).
+1988-05-01: crew calibrated the press bank; no anomaly recorded (entry 88024).
+1989-12-02: crew reconciled the seal row; a follow-up was queued (entry 88025).
+1990-07-03: crew archived the intake screen; the reading matched the prior week (entry 88026).
+1988-02-04: crew audited the vault register; two samples were retained (entry 88027).
+1989-09-05: crew recorded the mooring line; the entry was countersigned (entry 88028).
+1990-04-06: crew sealed the depot ledger; the band was re-tagged (entry 88029).
+1988-11-07: crew indexed the folio sleeve; the count agreed with the roll (entry 88030).
+1989-06-08: crew verified the muster book; the seal was replaced (entry 88031).
+1990-01-09: crew inspected the sensor rack; no anomaly recorded (entry 88032).
+1988-08-10: crew logged the gauge post; a follow-up was queued (entry 88033).
+1989-03-11: crew calibrated the press bank; the reading matched the prior week (entry 88034).
+1990-10-12: crew reconciled the seal row; two samples were retained (entry 88035).
+1988-05-13: crew archived the intake screen; the entry was countersigned (entry 88036).
+1989-12-14: crew audited the vault register; the band was re-tagged (entry 88037).
+1990-07-15: crew recorded the mooring line; the count agreed with the roll (entry 88038).
+1988-02-16: crew sealed the depot ledger; the seal was replaced (entry 88039).
+1989-09-17: crew indexed the folio sleeve; no anomaly recorded (entry 88040).
+1990-04-18: crew verified the muster book; a follow-up was queued (entry 88041).
+1988-11-19: crew inspected the sensor rack; the reading matched the prior week (entry 88042).
+1989-06-20: crew logged the gauge post; two samples were retained (entry 88043).
+1990-01-21: crew calibrated the press bank; the entry was countersigned (entry 88044).
+1988-08-22: crew reconciled the seal row; the band was re-tagged (entry 88045).
+1989-03-23: crew archived the intake screen; the count agreed with the roll (entry 88046).
+1990-10-24: crew audited the vault register; the seal was replaced (entry 88047).
+1988-05-25: crew recorded the mooring line; no anomaly recorded (entry 88048).
+1989-12-26: crew sealed the depot ledger; a follow-up was queued (entry 88049).
+1990-07-27: crew indexed the folio sleeve; the reading matched the prior week (entry 88050).
+1988-02-28: crew verified the muster book; two samples were retained (entry 88051).
+1989-09-01: crew inspected the sensor rack; the entry was countersigned (entry 88052).
+1990-04-02: crew logged the gauge post; the band was re-tagged (entry 88053).
+1988-11-03: crew calibrated the press bank; the count agreed with the roll (entry 88054).
+1989-06-04: crew reconciled the seal row; the seal was replaced (entry 88055).
+1990-01-05: crew archived the intake screen; no anomaly recorded (entry 88056).
+1988-08-06: crew audited the vault register; a follow-up was queued (entry 88057).
+1989-03-07: crew recorded the mooring line; the reading matched the prior week (entry 88058).
+1990-10-08: crew sealed the depot ledger; two samples were retained (entry 88059).
+1902-03-03: crew calibrated the sensor rack; the reading matched the prior week (entry 2000).
+1903-10-04: crew reconciled the gauge post; two samples were retained (entry 2001).
+1904-05-05: crew archived the press bank; the entry was countersigned (entry 2002).
+1902-12-06: crew audited the seal row; the band was re-tagged (entry 2003).
+1903-07-07: crew recorded the intake screen; the count agreed with the roll (entry 2004).
+1904-02-08: crew sealed the vault register; the seal was replaced (entry 2005).
+1902-09-09: crew indexed the mooring line; no anomaly recorded (entry 2006).
+1903-04-10: crew verified the depot ledger; a follow-up was queued (entry 2007).
+1904-11-11: crew inspected the folio sleeve; the reading matched the prior week (entry 2008).
+1902-06-12: crew logged the muster book; two samples were retained (entry 2009).
+1903-01-13: crew calibrated the sensor rack; the entry was countersigned (entry 2010).
+1904-08-14: crew reconciled the gauge post; the band was re-tagged (entry 2011).
+1902-03-15: crew archived the press bank; the count agreed with the roll (entry 2012).
+1903-10-16: crew audited the seal row; the seal was replaced (entry 2013).
+1904-05-17: crew recorded the intake screen; no anomaly recorded (entry 2014).
+1902-12-18: crew sealed the vault register; a follow-up was queued (entry 2015).
+1903-07-19: crew indexed the mooring line; the reading matched the prior week (entry 2016).
+1904-02-20: crew verified the depot ledger; two samples were retained (entry 2017).
+1902-09-21: crew inspected the folio sleeve; the entry was countersigned (entry 2018).
+1903-04-22: crew logged the muster book; the band was re-tagged (entry 2019).
+1904-11-23: crew calibrated the sensor rack; the count agreed with the roll (entry 2020).
+1902-06-24: crew reconciled the gauge post; the seal was replaced (entry 2021).
+1903-01-25: crew archived the press bank; no anomaly recorded (entry 2022).
+1904-08-26: crew audited the seal row; a follow-up was queued (entry 2023).
+1902-03-27: crew recorded the intake screen; the reading matched the prior week (entry 2024).
+1903-10-28: crew sealed the vault register; two samples were retained (entry 2025).
+1904-05-01: crew indexed the mooring line; the entry was countersigned (entry 2026).
+1902-12-02: crew verified the depot ledger; the band was re-tagged (entry 2027).
+1903-07-03: crew inspected the folio sleeve; the count agreed with the roll (entry 2028).
+1904-02-04: crew logged the muster book; the seal was replaced (entry 2029).
+1902-09-05: crew calibrated the sensor rack; no anomaly recorded (entry 2030).
+1903-04-06: crew reconciled the gauge post; a follow-up was queued (entry 2031).
+1904-11-07: crew archived the press bank; the reading matched the prior week (entry 2032).
+1902-06-08: crew audited the seal row; two samples were retained (entry 2033).
+1903-01-09: crew recorded the intake screen; the entry was countersigned (entry 2034).
+1904-08-10: crew sealed the vault register; the band was re-tagged (entry 2035).
+1902-03-11: crew indexed the mooring line; the count agreed with the roll (entry 2036).
+1903-10-12: crew verified the depot ledger; the seal was replaced (entry 2037).
+1904-05-13: crew inspected the folio sleeve; no anomaly recorded (entry 2038).
+1902-12-14: crew logged the muster book; a follow-up was queued (entry 2039).
+1903-07-15: crew calibrated the sensor rack; the reading matched the prior week (entry 2040).
+1904-02-16: crew reconciled the gauge post; two samples were retained (entry 2041).
+1902-09-17: crew archived the press bank; the entry was countersigned (entry 2042).
+1903-04-18: crew audited the seal row; the band was re-tagged (entry 2043).
+1904-11-19: crew recorded the intake screen; the count agreed with the roll (entry 2044).
+1902-06-20: crew sealed the vault register; the seal was replaced (entry 2045).
+1903-01-21: crew indexed the mooring line; no anomaly recorded (entry 2046).
+1904-08-22: crew verified the depot ledger; a follow-up was queued (entry 2047).
+1902-03-23: crew inspected the folio sleeve; the reading matched the prior week (entry 2048).
+1903-10-24: crew logged the muster book; two samples were retained (entry 2049).
+1904-05-25: crew calibrated the sensor rack; the entry was countersigned (entry 2050).
+1902-12-26: crew reconciled the gauge post; the band was re-tagged (entry 2051).
+1903-07-27: crew archived the press bank; the count agreed with the roll (entry 2052).
+1904-02-28: crew audited the seal row; the seal was replaced (entry 2053).
+1902-09-01: crew recorded the intake screen; no anomaly recorded (entry 2054).
+1903-04-02: crew sealed the vault register; a follow-up was queued (entry 2055).
+1904-11-03: crew indexed the mooring line; the reading matched the prior week (entry 2056).
+1902-06-04: crew verified the depot ledger; two samples were retained (entry 2057).
+1903-01-05: crew inspected the folio sleeve; the entry was countersigned (entry 2058).
+1904-08-06: crew logged the muster book; the band was re-tagged (entry 2059).
+1913-02-14: crew reconciled the seal row; a follow-up was queued (entry 13000).
+1914-09-15: crew archived the intake screen; the reading matched the prior week (entry 13001).
+1915-04-16: crew audited the vault register; two samples were retained (entry 13002).
+1913-11-17: crew recorded the mooring line; the entry was countersigned (entry 13003).
+1914-06-18: crew sealed the depot ledger; the band was re-tagged (entry 13004).
+1915-01-19: crew indexed the folio sleeve; the count agreed with the roll (entry 13005).
+1913-08-20: crew verified the muster book; the seal was replaced (entry 13006).
+1914-03-21: crew inspected the sensor rack; no anomaly recorded (entry 13007).
+1915-10-22: crew logged the gauge post; a follow-up was queued (entry 13008).
+1913-05-23: crew calibrated the press bank; the reading matched the prior week (entry 13009).
+1914-12-24: crew reconciled the seal row; two samples were retained (entry 13010).
+1915-07-25: crew archived the intake screen; the entry was countersigned (entry 13011).
+1913-02-26: crew audited the vault register; the band was re-tagged (entry 13012).
+1914-09-27: crew recorded the mooring line; the count agreed with the roll (entry 13013).
+1915-04-28: crew sealed the depot ledger; the seal was replaced (entry 13014).
+1913-11-01: crew indexed the folio sleeve; no anomaly recorded (entry 13015).
+1914-06-02: crew verified the muster book; a follow-up was queued (entry 13016).
+1915-01-03: crew inspected the sensor rack; the reading matched the prior week (entry 13017).
+1913-08-04: crew logged the gauge post; two samples were retained (entry 13018).
+1914-03-05: crew calibrated the press bank; the entry was countersigned (entry 13019).
+1915-10-06: crew reconciled the seal row; the band was re-tagged (entry 13020).
+1913-05-07: crew archived the intake screen; the count agreed with the roll (entry 13021).
+1914-12-08: crew audited the vault register; the seal was replaced (entry 13022).
+1915-07-09: crew recorded the mooring line; no anomaly recorded (entry 13023).
+1913-02-10: crew sealed the depot ledger; a follow-up was queued (entry 13024).
+1914-09-11: crew indexed the folio sleeve; the reading matched the prior week (entry 13025).
+1915-04-12: crew verified the muster book; two samples were retained (entry 13026).
+1913-11-13: crew inspected the sensor rack; the entry was countersigned (entry 13027).
+1914-06-14: crew logged the gauge post; the band was re-tagged (entry 13028).
+1915-01-15: crew calibrated the press bank; the count agreed with the roll (entry 13029).
+1913-08-16: crew reconciled the seal row; the seal was replaced (entry 13030).
+1914-03-17: crew archived the intake screen; no anomaly recorded (entry 13031).
+1915-10-18: crew audited the vault register; a follow-up was queued (entry 13032).
+1913-05-19: crew recorded the mooring line; the reading matched the prior week (entry 13033).
+1914-12-20: crew sealed the depot ledger; two samples were retained (entry 13034).
+1915-07-21: crew indexed the folio sleeve; the entry was countersigned (entry 13035).
+1913-02-22: crew verified the muster book; the band was re-tagged (entry 13036).
+1914-09-23: crew inspected the sensor rack; the count agreed with the roll (entry 13037).
+1915-04-24: crew logged the gauge post; the seal was replaced (entry 13038).
+1913-11-25: crew calibrated the press bank; no anomaly recorded (entry 13039).
+1914-06-26: crew reconciled the seal row; a follow-up was queued (entry 13040).
+1915-01-27: crew archived the intake screen; the reading matched the prior week (entry 13041).
+1913-08-28: crew audited the vault register; two samples were retained (entry 13042).
+1914-03-01: crew recorded the mooring line; the entry was countersigned (entry 13043).
+1915-10-02: crew sealed the depot ledger; the band was re-tagged (entry 13044).
+1913-05-03: crew indexed the folio sleeve; the count agreed with the roll (entry 13045).
+1914-12-04: crew verified the muster book; the seal was replaced (entry 13046).
+1915-07-05: crew inspected the sensor rack; no anomaly recorded (entry 13047).
+1913-02-06: crew logged the gauge post; a follow-up was queued (entry 13048).
+1914-09-07: crew calibrated the press bank; the reading matched the prior week (entry 13049).
+1915-04-08: crew reconciled the seal row; two samples were retained (entry 13050).
+1913-11-09: crew archived the intake screen; the entry was countersigned (entry 13051).
+1914-06-10: crew audited the vault register; the band was re-tagged (entry 13052).
+1915-01-11: crew recorded the mooring line; the count agreed with the roll (entry 13053).
+1913-08-12: crew sealed the depot ledger; the seal was replaced (entry 13054).
+1914-03-13: crew indexed the folio sleeve; no anomaly recorded (entry 13055).
+1915-10-14: crew verified the muster book; a follow-up was queued (entry 13056).
+1913-05-15: crew inspected the sensor rack; the reading matched the prior week (entry 13057).
+1914-12-16: crew logged the gauge post; two samples were retained (entry 13058).
+1915-07-17: crew calibrated the press bank; the entry was countersigned (entry 13059).
+1924-01-25: crew archived the mooring line; no anomaly recorded (entry 24000).
+1925-08-26: crew audited the depot ledger; a follow-up was queued (entry 24001).
+1926-03-27: crew recorded the folio sleeve; the reading matched the prior week (entry 24002).
+1924-10-28: crew sealed the muster book; two samples were retained (entry 24003).
+1925-05-01: crew indexed the sensor rack; the entry was countersigned (entry 24004).
+1926-12-02: crew verified the gauge post; the band was re-tagged (entry 24005).
+1924-07-03: crew inspected the press bank; the count agreed with the roll (entry 24006).
+1925-02-04: crew logged the seal row; the seal was replaced (entry 24007).
+1926-09-05: crew calibrated the intake screen; no anomaly recorded (entry 24008).
+1924-04-06: crew reconciled the vault register; a follow-up was queued (entry 24009).
+1925-11-07: crew archived the mooring line; the reading matched the prior week (entry 24010).
+1926-06-08: crew audited the depot ledger; two samples were retained (entry 24011).
+1924-01-09: crew recorded the folio sleeve; the entry was countersigned (entry 24012).
+1925-08-10: crew sealed the muster book; the band was re-tagged (entry 24013).
+1926-03-11: crew indexed the sensor rack; the count agreed with the roll (entry 24014).
+1924-10-12: crew verified the gauge post; the seal was replaced (entry 24015).
+1925-05-13: crew inspected the press bank; no anomaly recorded (entry 24016).
+1926-12-14: crew logged the seal row; a follow-up was queued (entry 24017).
+1924-07-15: crew calibrated the intake screen; the reading matched the prior week (entry 24018).
+1925-02-16: crew reconciled the vault register; two samples were retained (entry 24019).
+1926-09-17: crew archived the mooring line; the entry was countersigned (entry 24020).
+1924-04-18: crew audited the depot ledger; the band was re-tagged (entry 24021).
+1925-11-19: crew recorded the folio sleeve; the count agreed with the roll (entry 24022).
+1926-06-20: crew sealed the muster book; the seal was replaced (entry 24023).
+1924-01-21: crew indexed the sensor rack; no anomaly recorded (entry 24024).
+1925-08-22: crew verified the gauge post; a follow-up was queued (entry 24025).
+1926-03-23: crew inspected the press bank; the reading matched the prior week (entry 24026).
+1924-10-24: crew logged the seal row; two samples were retained (entry 24027).
+1925-05-25: crew calibrated the intake screen; the entry was countersigned (entry 24028).
+1926-12-26: crew reconciled the vault register; the band was re-tagged (entry 24029).
+1924-07-27: crew archived the mooring line; the count agreed with the roll (entry 24030).
+1925-02-28: crew audited the depot ledger; the seal was replaced (entry 24031).
+1926-09-01: crew recorded the folio sleeve; no anomaly recorded (entry 24032).
+1924-04-02: crew sealed the muster book; a follow-up was queued (entry 24033).
+1925-11-03: crew indexed the sensor rack; the reading matched the prior week (entry 24034).
+1926-06-04: crew verified the gauge post; two samples were retained (entry 24035).
+1924-01-05: crew inspected the press bank; the entry was countersigned (entry 24036).
+1925-08-06: crew logged the seal row; the band was re-tagged (entry 24037).
+1926-03-07: crew calibrated the intake screen; the count agreed with the roll (entry 24038).
+1924-10-08: crew reconciled the vault register; the seal was replaced (entry 24039).
+1925-05-09: crew archived the mooring line; no anomaly recorded (entry 24040).
+1926-12-10: crew audited the depot ledger; a follow-up was queued (entry 24041).
+1924-07-11: crew recorded the folio sleeve; the reading matched the prior week (entry 24042).
+1925-02-12: crew sealed the muster book; two samples were retained (entry 24043).
+1926-09-13: crew indexed the sensor rack; the entry was countersigned (entry 24044).
+1924-04-14: crew verified the gauge post; the band was re-tagged (entry 24045).
+1925-11-15: crew inspected the press bank; the count agreed with the roll (entry 24046).
+1926-06-16: crew logged the seal row; the seal was replaced (entry 24047).
+1924-01-17: crew calibrated the intake screen; no anomaly recorded (entry 24048).
+1925-08-18: crew reconciled the vault register; a follow-up was queued (entry 24049).
+1926-03-19: crew archived the mooring line; the reading matched the prior week (entry 24050).
+1924-10-20: crew audited the depot ledger; two samples were retained (entry 24051).
+1925-05-21: crew recorded the folio sleeve; the entry was countersigned (entry 24052).
+1926-12-22: crew sealed the muster book; the band was re-tagged (entry 24053).
+1924-07-23: crew indexed the sensor rack; the count agreed with the roll (entry 24054).
+1925-02-24: crew verified the gauge post; the seal was replaced (entry 24055).
+1926-09-25: crew inspected the press bank; no anomaly recorded (entry 24056).
+1924-04-26: crew logged the seal row; a follow-up was queued (entry 24057).
+1925-11-27: crew calibrated the intake screen; the reading matched the prior week (entry 24058).
+1926-06-28: crew reconciled the vault register; two samples were retained (entry 24059).
+1935-12-08: crew audited the muster book; the seal was replaced (entry 35000).
+1936-07-09: crew recorded the sensor rack; no anomaly recorded (entry 35001).
+1937-02-10: crew sealed the gauge post; a follow-up was queued (entry 35002).
+1935-09-11: crew indexed the press bank; the reading matched the prior week (entry 35003).
+1936-04-12: crew verified the seal row; two samples were retained (entry 35004).
+1937-11-13: crew inspected the intake screen; the entry was countersigned (entry 35005).
+1935-06-14: crew logged the vault register; the band was re-tagged (entry 35006).
+1936-01-15: crew calibrated the mooring line; the count agreed with the roll (entry 35007).
+1937-08-16: crew reconciled the depot ledger; the seal was replaced (entry 35008).
+1935-03-17: crew archived the folio sleeve; no anomaly recorded (entry 35009).
+1936-10-18: crew audited the muster book; a follow-up was queued (entry 35010).
+1937-05-19: crew recorded the sensor rack; the reading matched the prior week (entry 35011).
+1935-12-20: crew sealed the gauge post; two samples were retained (entry 35012).
+1936-07-21: crew indexed the press bank; the entry was countersigned (entry 35013).
+1937-02-22: crew verified the seal row; the band was re-tagged (entry 35014).
+1935-09-23: crew inspected the intake screen; the count agreed with the roll (entry 35015).
+1936-04-24: crew logged the vault register; the seal was replaced (entry 35016).
+1937-11-25: crew calibrated the mooring line; no anomaly recorded (entry 35017).
+1935-06-26: crew reconciled the depot ledger; a follow-up was queued (entry 35018).
+1936-01-27: crew archived the folio sleeve; the reading matched the prior week (entry 35019).
+1937-08-28: crew audited the muster book; two samples were retained (entry 35020).
+1935-03-01: crew recorded the sensor rack; the entry was countersigned (entry 35021).
+1936-10-02: crew sealed the gauge post; the band was re-tagged (entry 35022).
+1937-05-03: crew indexed the press bank; the count agreed with the roll (entry 35023).
+1935-12-04: crew verified the seal row; the seal was replaced (entry 35024).
+1936-07-05: crew inspected the intake screen; no anomaly recorded (entry 35025).
+1937-02-06: crew logged the vault register; a follow-up was queued (entry 35026).
+1935-09-07: crew calibrated the mooring line; the reading matched the prior week (entry 35027).
+1936-04-08: crew reconciled the depot ledger; two samples were retained (entry 35028).
+1937-11-09: crew archived the folio sleeve; the entry was countersigned (entry 35029).
+1935-06-10: crew audited the muster book; the band was re-tagged (entry 35030).
+1936-01-11: crew recorded the sensor rack; the count agreed with the roll (entry 35031).
+1937-08-12: crew sealed the gauge post; the seal was replaced (entry 35032).
+1935-03-13: crew indexed the press bank; no anomaly recorded (entry 35033).
+1936-10-14: crew verified the seal row; a follow-up was queued (entry 35034).
+1937-05-15: crew inspected the intake screen; the reading matched the prior week (entry 35035).
+1935-12-16: crew logged the vault register; two samples were retained (entry 35036).
+1936-07-17: crew calibrated the mooring line; the entry was countersigned (entry 35037).
+1937-02-18: crew reconciled the depot ledger; the band was re-tagged (entry 35038).
+1935-09-19: crew archived the folio sleeve; the count agreed with the roll (entry 35039).
+1936-04-20: crew audited the muster book; the seal was replaced (entry 35040).
+1937-11-21: crew recorded the sensor rack; no anomaly recorded (entry 35041).
+1935-06-22: crew sealed the gauge post; a follow-up was queued (entry 35042).
+1936-01-23: crew indexed the press bank; the reading matched the prior week (entry 35043).
+1937-08-24: crew verified the seal row; two samples were retained (entry 35044).
+1935-03-25: crew inspected the intake screen; the entry was countersigned (entry 35045).
+1936-10-26: crew logged the vault register; the band was re-tagged (entry 35046).
+1937-05-27: crew calibrated the mooring line; the count agreed with the roll (entry 35047).
+1935-12-28: crew reconciled the depot ledger; the seal was replaced (entry 35048).
+1936-07-01: crew archived the folio sleeve; no anomaly recorded (entry 35049).
+1937-02-02: crew audited the muster book; a follow-up was queued (entry 35050).
+1935-09-03: crew recorded the sensor rack; the reading matched the prior week (entry 35051).
+1936-04-04: crew sealed the gauge post; two samples were retained (entry 35052).
+1937-11-05: crew indexed the press bank; the entry was countersigned (entry 35053).
+1935-06-06: crew verified the seal row; the band was re-tagged (entry 35054).
+1936-01-07: crew inspected the intake screen; the count agreed with the roll (entry 35055).
+1937-08-08: crew logged the vault register; the seal was replaced (entry 35056).
+1935-03-09: crew calibrated the mooring line; no anomaly recorded (entry 35057).
+1936-10-10: crew reconciled the depot ledger; a follow-up was queued (entry 35058).
+1937-05-11: crew archived the folio sleeve; the reading matched the prior week (entry 35059).

@@ -204,9 +204,21 @@ def test_adaptive_retrieval_accepts_only_on_or_off() -> None:
 
 def test_no_credential_like_fields_in_settings() -> None:
     forbidden = ("key", "token", "secret", "password", "credential")
+    # Narrow, per-field/per-substring exception (Phase 6): the NAME of
+    # this output-length bound contains "token" but it is never a
+    # credential - it is the plan-required generation output cap. Every
+    # other field, and every other forbidden substring, keeps full
+    # coverage; the exception stays tied to a real field (no allowlist
+    # rot).
+    allowed = {"generation_max_tokens": frozenset({"token"})}
+    assert "generation_max_tokens" in Settings.model_fields
     for name in Settings.model_fields:
         lowered = name.lower()
-        assert not any(bad in lowered for bad in forbidden), name
+        for bad in forbidden:
+            if bad in lowered:
+                assert allowed.get(name, frozenset()) == frozenset({bad}), (
+                    f"{name} contains credential-like substring {bad!r}"
+                )
 
 
 # --- Environment mapping (pydantic-settings; hermetic via conftest) ---

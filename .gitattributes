@@ -1,0 +1,5 @@
+# Frozen evaluation corpus is SHA-256+size pinned by corpora/synthetic_v1/manifest.json
+# (verified by tests/eval/test_frozen_corpus.py and eval/dataset.py manifest checks).
+# -text disables all newline conversion so the exact manifest bytes are stored
+# and checked out identically on every platform, regardless of core.autocrlf.
+corpora/synthetic_v1/** -text

@@ -31,6 +31,7 @@ writes (paths are validated, not created).
 
 from __future__ import annotations
 
+import math
 from pathlib import Path
 from typing import Literal
 from urllib.parse import urlparse
@@ -95,8 +96,14 @@ class Settings(BaseSettings):
     Environment mapping (case-insensitive, pydantic-settings): ``EGRESS_MODE``,
     ``EGRESS_ALLOWLIST`` (JSON list), ``OLLAMA_BASE_URL``, ``PORT``,
     ``LOCAL_GENERATION_ENABLED``, ``ADAPTIVE_RETRIEVAL``, ``LOG_LEVEL``,
-    ``DATA_DIR``, ``REPORTS_DIR``. A project-root ``.env`` file is read when
-    present (``.env`` is gitignored; ``.env.example`` documents the keys).
+    ``DATA_DIR``, ``REPORTS_DIR``, ``CHUNK_SIZE``, ``CHUNK_OVERLAP``,
+    ``MAX_INPUT_FILE_BYTES``, ``RETRIEVAL_TOP_K``,
+    ``RETRIEVAL_QUERY_MAX_CHARS``, ``RETRIEVAL_DENSE_CANDIDATES``,
+    ``RETRIEVAL_LEXICAL_CANDIDATES``, ``RETRIEVAL_SCORE_FLOOR``,
+    ``GENERATION_MODEL``, ``GENERATION_MAX_TOKENS``,
+    ``GENERATION_CONTEXT_CHUNKS``, ``GENERATION_PROMPT_CHARS``. A
+    project-root ``.env`` file is read when present (``.env`` is gitignored;
+    ``.env.example`` documents the keys).
     """
 
     model_config = SettingsConfigDict(
@@ -124,6 +131,75 @@ class Settings(BaseSettings):
     # Project-local artifact paths (Z9): must stay under the project root on D:.
     data_dir: Path = PROJECT_ROOT / "data"
     reports_dir: Path = PROJECT_ROOT / "reports"
+
+    # Ingestion bounds (Phase 4; "config-validated, hard caps" - operational
+    # bounds carried from plan v1 section 6.2 into v2.4 section 10.2 and
+    # docs/RESOURCE_BUDGET.md section 5.2):
+    # - chunk size ~1000 chars, hard max 2000; overlap ~150, hard max 400.
+    # - per-file ingest size 50 MB (the "Ingest file size" row of the same
+    #   section 6.2 bounds table); checked by stat BEFORE any read and
+    #   re-checked against the bytes actually read (the post-read check
+    #   detects and rejects an oversized read but does not prevent the
+    #   transient allocation - see ingestion/loaders.py).
+    chunk_size: int = Field(default=1000, ge=1, le=2000)
+    chunk_overlap: int = Field(default=150, ge=0, le=400)
+    max_input_file_bytes: int = Field(
+        default=50 * 1024 * 1024, ge=1, le=50 * 1024 * 1024
+    )
+
+    # Retrieval bounds (Phase 5; plan v2.4 section 10.1 operational bounds and
+    # v1 section 6.2: top-k default 8, hard max 20; I7 hard caps - all
+    # config-validated, single source of truth for the retrieval package).
+    # - retrieval_score_floor is DELIBERATELY unset (None): the plan requires
+    #   a frozen floor but states no numeric value, and none is invented here.
+    #   While None the dense retrieval leg is not operational and queries run
+    #   lexical-only (FTS5) with the reason reported in the result metadata;
+    #   freezing a value is a separate owner decision (proposed 0.30, pending
+    #   approval - see the Phase 5 report). The floor applies ONLY to the
+    #   dense leg's cosine similarity; raw FTS5 BM25 values are a ranking
+    #   signal and are never compared to it.
+    # - candidate counts bound each retrieval leg before fusion (bounded
+    #   intermediate allocations, I7); the query-character cap bounds input.
+    retrieval_top_k: int = Field(default=8, ge=1, le=20)
+    retrieval_query_max_chars: int = Field(default=512, ge=1, le=2000)
+    retrieval_dense_candidates: int = Field(default=20, ge=1, le=100)
+    retrieval_lexical_candidates: int = Field(default=20, ge=1, le=100)
+    retrieval_score_floor: float | None = None
+
+    # Generation bounds (Phase 6; plan v2.4 section 10.1 frozen caps + I7).
+    # All generation stays OFF by default: local_generation_enabled=False
+    # and generation_model=None mean retrieval-only with zero socket
+    # activity (Z11 / section 5.4). No credential fields exist here (I6).
+    # - generation_model: explicit selection only; there is deliberately
+    #   NO default model name - a request never guesses a model (5.1).
+    # - generation_max_tokens: output-token cap, a DESIGN CHOICE within
+    #   I7 "bounded everything" (the plan freezes the input caps; this
+    #   bound is handed to the provider as num_predict - it is NOT a
+    #   claim of token-level runtime enforcement; character limits are
+    #   the structurally enforced ones).
+    # - generation_context_chunks / generation_prompt_chars may only
+    #   TIGHTEN the frozen plan caps (8 chunks / 8000 chars), never
+    #   exceed them - the le= bound IS that cap, single-source here and
+    #   in generation/types.py.
+    generation_model: str | None = None
+    generation_max_tokens: int = Field(default=512, ge=1, le=4096)
+    generation_context_chunks: int = Field(default=8, ge=1, le=8)
+    generation_prompt_chars: int = Field(default=8000, ge=1, le=8000)
+
+    @field_validator("generation_model")
+    @classmethod
+    def _generation_model_must_be_explicit_if_set(cls, value: str | None) -> str | None:
+        # None stays the shipped default (no provider guessed, 5.1); an
+        # empty or whitespace-only string is not a selection.
+        if value is None:
+            return None
+        stripped = value.strip()
+        if not stripped:
+            raise ValueError(
+                "generation_model must be unset (None) or a non-empty explicit "
+                "model name; an empty string is not a model selection (5.1)"
+            )
+        return stripped
 
     @field_validator("ollama_base_url")
     @classmethod
@@ -166,6 +242,33 @@ class Settings(BaseSettings):
                 "(Z9: all project artifacts stay on D:)"
             )
         return resolved
+
+    @field_validator("retrieval_score_floor")
+    @classmethod
+    def _score_floor_must_be_a_cosine_similarity(
+        cls, value: float | None
+    ) -> float | None:
+        # Bounded to the dense leg's score space. None means "unset": the
+        # dense leg stays non-operational until the owner freezes a value.
+        if value is None:
+            return value
+        if not math.isfinite(value) or not -1.0 <= value <= 1.0:
+            raise ValueError(
+                "retrieval_score_floor must be unset (None) or a finite cosine "
+                f"similarity in [-1.0, 1.0]; got {value!r}"
+            )
+        return value
+
+    @model_validator(mode="after")
+    def _chunk_overlap_must_be_smaller_than_chunk_size(self) -> "Settings":
+        # Progress guarantee precondition (I7): with overlap >= chunk_size the
+        # chunker could never advance. Rejected at startup, not at runtime.
+        if self.chunk_overlap >= self.chunk_size:
+            raise ValueError(
+                f"chunk_overlap ({self.chunk_overlap}) must be smaller than "
+                f"chunk_size ({self.chunk_size}) so chunking always makes progress"
+            )
+        return self
 
     @model_validator(mode="after")
     def _egress_configuration_must_be_coherent(self) -> "Settings":

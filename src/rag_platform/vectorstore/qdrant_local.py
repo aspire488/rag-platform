@@ -22,8 +22,9 @@ Scope and guarantees (Phase 2):
   4): the plan fixes no vector dimension before Phase 3, so none is invented
   here and no embedding model is ever imported or loaded by this module.
 - **Deterministic edge-behaviour contract:**
-    - ``search`` / ``count`` on a missing collection -> empty list / 0
-      (reads are total: a collection that was never created has no vectors)
+    - ``search`` / ``count`` / ``all_ids`` on a missing collection -> empty
+      list / 0 / empty set (reads are total: a collection that was never
+      created has no vectors)
     - ``add`` / ``remove`` on a missing collection -> :class:`CollectionError`
       (writes fail loud; no implicit creation that could mask corruption)
     - ``remove`` of valid ids that do not exist -> documented no-op
@@ -38,7 +39,8 @@ Scope and guarantees (Phase 2):
 Deliberately out of scope (later phases): ingestion, embeddings, hybrid
 retrieval/RRF, tenant/ACL payload schemas, generation, provider routing,
 and any network path. The store interface stays narrow: collection
-init, upsert, removal, count, and filtered search.
+init, upsert, removal, count, filtered search, id enumeration, and
+read-only distance-metric inspection (Phase 5).
 """
 
 from __future__ import annotations
@@ -61,6 +63,11 @@ _DISTANCE_MAP: dict[str, models.Distance] = {
     "Euclid": models.Distance.EUCLID,
     "Dot": models.Distance.DOT,
 }
+# Reverse lookup for read-only metric inspection (Phase 5 remediation F1):
+# query-time score-space checks must verify Cosine, never assume it.
+_DISTANCE_NAMES: dict[models.Distance, str] = {
+    value: name for name, value in _DISTANCE_MAP.items()
+}
 
 #: I7 (bounded everything) sanity cap on vector dimension. MiniLM is 384
 #: dims; anything above this is a configuration bug, not a real local model.
@@ -69,6 +76,9 @@ _MAX_VECTOR_SIZE = 4096
 #: I7 cap for a single adapter search call (plan section 10.1: top-k max 20
 #: for retrieval; the adapter allows headroom but refuses unbounded limits).
 _MAX_SEARCH_LIMIT = 100
+
+#: Bounded scroll page size for ``all_ids`` id enumeration (Phase 5; I7).
+_SCROLL_PAGE_SIZE = 256
 
 
 class VectorStoreError(Exception):
@@ -473,3 +483,62 @@ class QdrantLocalStore:
         if not self._client.collection_exists(name):
             return 0
         return int(self._client.count(collection_name=name, exact=True).count)
+
+    def all_ids(self, collection: str) -> set[int | str]:
+        """Every point id stored in *collection* (read-only enumeration).
+
+        Phase 5 addition. Index reconciliation diffs the stored id set
+        against the persisted chunk ids to delete stale points after content
+        replacement; a similarity search cannot enumerate ids. Reads stay
+        total - a missing collection yields an empty set. The enumeration is
+        full by design (local, cap-bounded collections, plan section 10.1)
+        and scrolls in bounded pages of ``_SCROLL_PAGE_SIZE``.
+        """
+        name = _validate_collection_name(collection)
+        self._require_open()
+        if not self._client.collection_exists(name):
+            return set()
+        ids: set[int | str] = set()
+        offset: object | None = None
+        while True:
+            page, offset = self._client.scroll(
+                collection_name=name,
+                limit=_SCROLL_PAGE_SIZE,
+                offset=offset,
+                with_payload=False,
+                with_vectors=False,
+            )
+            for record in page:
+                ids.add(record.id)
+            if offset is None or len(page) == 0:
+                break
+        return ids
+
+    def collection_distance(self, collection: str) -> str | None:
+        """Distance metric of *collection* as a validated adapter name.
+
+        Phase 5 remediation F1. Read-only inspection used by retrieval to
+        verify that a score floor is only ever compared against Cosine
+        similarity scores (the score space the floor is validated for);
+        the adapter never assumes a metric. Reads stay total: a collection
+        that was never created has no metric, so ``None`` is returned.
+        A named-vector collection (not managed by this adapter) raises
+        :class:`CollectionError`, as does an unrecognized metric.
+        """
+        name = _validate_collection_name(collection)
+        self._require_open()
+        if not self._client.collection_exists(name):
+            return None
+        info = self._client.get_collection(collection_name=name)
+        vectors = info.config.params.vectors
+        if isinstance(vectors, dict):
+            raise CollectionError(
+                f"collection {collection!r} uses named vectors, which this "
+                "adapter does not manage"
+            )
+        try:
+            return _DISTANCE_NAMES[models.Distance(vectors.distance)]
+        except (KeyError, ValueError) as exc:
+            raise CollectionError(
+                f"collection {collection!r} uses an unrecognized distance metric"
+            ) from exc

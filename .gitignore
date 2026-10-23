@@ -18,5 +18,6 @@ __pycache__/
 .pytest_cache/
 
 # Raw corpora and models (frozen eval datasets\ ARE committed; raw corpora are not)
-corpora/
+corpora/*
+!corpora/synthetic_v1/
 models/

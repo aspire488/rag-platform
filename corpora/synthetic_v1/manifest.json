@@ -1,0 +1,142 @@
+{
+  "author": "Joel (locally authored, deterministic builder)",
+  "chunk_overlap": 150,
+  "chunk_size": 1000,
+  "created_at": "2026-10-21T00:00:00Z",
+  "dataset_id": "synthetic_v1",
+  "files": [
+    {
+      "path": "documents/water_authority.txt",
+      "sha256": "4d9f6adf4941ed9249a1b4e1f94a4ebe69abeb9d3dabe957a1f09025f2a1c0a1",
+      "size_bytes": 64463
+    },
+    {
+      "path": "documents/water_operations.md",
+      "sha256": "c79dbf6d7d44a8d4c1f257cb553c78bef2770db76ebb1d2a827e8d3193970c5a",
+      "size_bytes": 65899
+    },
+    {
+      "path": "documents/water_advisory.txt",
+      "sha256": "87fc6b72544bb2cf6cb807e3d154080034090a33a901a530e2f21f7a42ca7adb",
+      "size_bytes": 67410
+    },
+    {
+      "path": "documents/water_bulletin.pdf",
+      "sha256": "10d3ace8116f2b1b896251d5f0aa7f1eef5e8ae53d22b0214684b629b518ca82",
+      "size_bytes": 79482
+    },
+    {
+      "path": "documents/seed_authority.md",
+      "sha256": "6b3c571b6716cd3ce76a6ec12ca5fc3a56cff1692cdb5471bdbfe5bd834eaddc",
+      "size_bytes": 64362
+    },
+    {
+      "path": "documents/seed_operations.txt",
+      "sha256": "3a2dcacf998312d54fb1cfa494d1e3f0635c8766fddba51147393a835427713d",
+      "size_bytes": 65819
+    },
+    {
+      "path": "documents/seed_advisory.pdf",
+      "sha256": "914812121ef8d5dc26e516b3011f6343438e3b52f9067831edcfaef5f04c5769",
+      "size_bytes": 84641
+    },
+    {
+      "path": "documents/seed_bulletin.txt",
+      "sha256": "5bc9b5860961fb1bef8fccb9908636adfa897421cfd89895ea3bac13ded26c9b",
+      "size_bytes": 63370
+    },
+    {
+      "path": "documents/marine_authority.pdf",
+      "sha256": "911dbf0bcc0387b1f31e80ba9df21cb5af72b22e5fcb49ba43217eb31d45683a",
+      "size_bytes": 80576
+    },
+    {
+      "path": "documents/marine_operations.md",
+      "sha256": "715b9e9f98b3c06b0ca8707673d2e30d7a0a1791c88f437075c86da5d213f87b",
+      "size_bytes": 65788
+    },
+    {
+      "path": "documents/marine_advisory.txt",
+      "sha256": "a00202f47ce5de331ca849607d5e4247a733782c8237b36a479afaecca7c8ba7",
+      "size_bytes": 67381
+    },
+    {
+      "path": "documents/marine_bulletin.md",
+      "sha256": "8c3b681308b7199c0cf8cd2863c537383b49b691a70ad50d28f00f7708f19ecb",
+      "size_bytes": 63138
+    },
+    {
+      "path": "documents/transit_authority.txt",
+      "sha256": "7d21019478da7d23011e2a48b7161ddbba2955b068d11e5c867dc218effd190f",
+      "size_bytes": 64334
+    },
+    {
+      "path": "documents/transit_operations.pdf",
+      "sha256": "07828d887dcd683cd9444f3a89c1b262985f82fa4341ef4ce380a979132c881a",
+      "size_bytes": 82160
+    },
+    {
+      "path": "documents/transit_advisory.md",
+      "sha256": "48a2a71564999f55c503fa1e8964976d34b6f4fe621c6c5b4795bad452e1a0df",
+      "size_bytes": 67518
+    },
+    {
+      "path": "documents/transit_bulletin.txt",
+      "sha256": "799c4a823daf8c5854fdd049255ca345a215435b09cab743ecee0b085c1d64ba",
+      "size_bytes": 63090
+    },
+    {
+      "path": "documents/library_authority.md",
+      "sha256": "3d3489908fca0c517d86376dab52261884734d24484026453c4f32e0f343e418",
+      "size_bytes": 64415
+    },
+    {
+      "path": "documents/library_operations.txt",
+      "sha256": "23a18f8d632cd5746a54270f333e37d4e4007a5183b2cd3d90d2f934e904986e",
+      "size_bytes": 65900
+    },
+    {
+      "path": "documents/library_advisory.txt",
+      "sha256": "ff0ee32acba5f5d1730ce0671dd3fec27cb917062247302440d50c4e7b38bfd6",
+      "size_bytes": 67580
+    },
+    {
+      "path": "documents/library_bulletin.pdf",
+      "sha256": "160d5e4763062fae934c6245e7bf31264ec25bb9b51ac8e255c06e9c8f5743f4",
+      "size_bytes": 79490
+    },
+    {
+      "path": "documents/history_authority.txt",
+      "sha256": "9ffcc3c54d068d3d226d0a615c8b16c49d2804eb892bee2b122c988feff2437b",
+      "size_bytes": 64345
+    },
+    {
+      "path": "documents/history_operations.md",
+      "sha256": "76317d491f5a04e5bc1502652b5a935de45f5d79e9b9aa085aeb634408afb7e1",
+      "size_bytes": 65888
+    },
+    {
+      "path": "documents/history_advisory.pdf",
+      "sha256": "1b4cebfc7c748d299e81b12f7422d88cefcfa9269d26a5e79c57c0a2aadc8e35",
+      "size_bytes": 83989
+    },
+    {
+      "path": "documents/history_bulletin.md",
+      "sha256": "5fb8c766a5ca681c3cc52ae2ee186e9bd52feccafe3fa5528e1a5c60d54e7fe7",
+      "size_bytes": 63236
+    },
+    {
+      "path": "questions/questions_dev.jsonl",
+      "sha256": "26c51f96d34b56cd5e516e03525b39423da09e7edd01896203842be2e8ac2917",
+      "size_bytes": 32616,
+      "split": "dev"
+    },
+    {
+      "path": "questions/questions_test.jsonl",
+      "sha256": "359d54c978aa43bc0d05e22aee83fe6c635a1cc3e8f8d2203aa78c2cd04083bd",
+      "size_bytes": 20414,
+      "split": "test"
+    }
+  ],
+  "schema": "rag-platform-eval-manifest/1"
+}

@@ -57,18 +57,26 @@ class Migration:
 
 
 _SCHEMA_SQL_PATH = Path(__file__).with_name("schema.sql")
+_MIGRATION_V2_SQL_PATH = Path(__file__).with_name("migration_v2_ingestion.sql")
 
 
-def _load_baseline_sql() -> str:
-    sql = _SCHEMA_SQL_PATH.read_text(encoding="utf-8")
+def _load_migration_sql(path: Path, label: str) -> str:
+    sql = path.read_text(encoding="utf-8")
     if not sql.strip():
-        raise MigrationError(f"baseline schema file is empty: {_SCHEMA_SQL_PATH}")
+        raise MigrationError(f"{label} schema file is empty: {path}")
     return sql
 
 
-#: The registry this code supports. v1 is the Phase 2 baseline.
+#: The registry this code supports. v1 is the Phase 2 baseline; v2 adds the
+#: Phase 4 ingestion corpus tables (documents/chunks). Appended in version
+#: order - nothing historical is edited in place.
 MIGRATIONS: tuple[Migration, ...] = (
-    Migration(1, "baseline_schema", _load_baseline_sql()),
+    Migration(1, "baseline_schema", _load_migration_sql(_SCHEMA_SQL_PATH, "baseline")),
+    Migration(
+        2,
+        "ingestion_corpus",
+        _load_migration_sql(_MIGRATION_V2_SQL_PATH, "migration v2"),
+    ),
 )
 
 #: Version of the newest migration in :data:`MIGRATIONS`.
