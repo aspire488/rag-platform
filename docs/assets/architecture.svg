@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 840" width="720" height="840" role="img" aria-labelledby="title desc">
+  <title id="title">rag-platform architecture as committed</title>
+  <desc id="desc">Three zones. Runs today: Settings feeds create_app, which serves GET /health and installs redacted logging. Built and tested on their own but not wired together: MiniLMEmbedder (384-dim, lazy, CPU), QdrantLocalStore (file-backed, no URL) and SQLite with FTS5 (WAL, trace tables); their wires end in open terminals. Planned path into the stores: documents (pdf, txt, md), then ingest (load, chunk, scan; in progress, not committed), then index (embed and store into the three blocks above). After that, queries take the nine trace stages in the header image.</desc>
+  <style>
+    .bg{fill:#0d1418}.edge{fill:none;stroke:#26343b;stroke-width:2}
+    .ink{fill:#e7eff1}.muted{fill:#8fa3ab}.teal{fill:#3cc8c0}.amber{fill:#e2b45c}
+    .mono{font-family:ui-monospace,'Cascadia Code','SF Mono',Menlo,Consolas,'DejaVu Sans Mono',monospace}
+    .sans{font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif}
+    .runs{fill:#12302f;stroke:#3cc8c0;stroke-width:2}
+    .built{fill:none;stroke:#3cc8c0;stroke-width:2}
+    .wip{fill:none;stroke:#e2b45c;stroke-width:2}
+    .planned{fill:none;stroke:#7f949c;stroke-width:2;stroke-dasharray:6 5}
+    .wire{fill:none;stroke:#3cc8c0;stroke-width:2;stroke-linecap:round}
+    .loose{fill:none;stroke:#3cc8c0;stroke-width:2;stroke-dasharray:3 7;stroke-linecap:round}
+    .flow{fill:none;stroke:#5d717a;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  </style>
+  <rect class="bg" x="1" y="1" width="718" height="838" rx="14"/>
+  <rect class="edge" x="1" y="1" width="718" height="838" rx="14"/>
+
+  <!-- zone 1: wired and running -->
+  <text class="teal sans" x="40" y="52" font-size="23" font-weight="600">Runs today</text>
+  <g class="mono" font-size="22">
+    <rect class="runs" x="40" y="72" width="152" height="48" rx="8"/><text class="ink" x="58" y="103">Settings</text>
+    <rect class="runs" x="232" y="72" width="176" height="48" rx="8"/><text class="ink" x="250" y="103">create_app</text>
+    <rect class="runs" x="448" y="72" width="232" height="48" rx="8"/><text class="ink" x="466" y="103">GET /health</text>
+    <rect class="runs" x="232" y="152" width="256" height="48" rx="8"/><text class="ink" x="250" y="183">redacted logging</text>
+  </g>
+  <path class="wire" d="M192 96h40M226 90l6 6-6 6M408 96h40M442 90l6 6-6 6M290 120v32"/>
+
+  <!-- zone 2: real, tested modules with nothing between them -->
+  <text class="teal sans" x="40" y="262" font-size="23" font-weight="600">Built, tested on their own, not wired together</text>
+  <g font-size="22">
+    <rect class="built" x="40" y="282" width="540" height="48" rx="8"/><text class="ink mono" x="56" y="313">MiniLMEmbedder</text><text class="muted sans" x="564" y="313" text-anchor="end">384-dim, lazy, CPU</text>
+    <rect class="built" x="40" y="342" width="540" height="48" rx="8"/><text class="ink mono" x="56" y="373">QdrantLocalStore</text><text class="muted sans" x="564" y="373" text-anchor="end">file-backed, no URL</text>
+    <rect class="built" x="40" y="402" width="540" height="48" rx="8"/><text class="ink mono" x="56" y="433">SQLite + FTS5</text><text class="muted sans" x="564" y="433" text-anchor="end">WAL, trace tables</text>
+  </g>
+  <!-- loose wires: each ends in an open terminal, connected to nothing -->
+  <path class="loose" d="M580 306h56M580 366h56M580 426h56"/>
+  <g fill="#0d1418" stroke="#3cc8c0" stroke-width="2"><circle cx="646" cy="306" r="8"/><circle cx="646" cy="366" r="8"/><circle cx="646" cy="426" r="8"/></g>
+  <text class="muted sans" x="40" y="488" font-size="22">No pipeline connects these yet.</text>
+
+  <!-- zone 3: the planned way in; the request side is the header's trace_stages -->
+  <text class="muted sans" x="40" y="548" font-size="23" font-weight="600">Planned path into the stores</text>
+  <g class="mono" font-size="22">
+    <rect class="planned" x="40" y="568" width="380" height="44" rx="8"/><text class="ink" x="56" y="597">documents: pdf, txt, md</text>
+    <rect class="wip" x="40" y="624" width="380" height="44" rx="8"/><text class="ink" x="56" y="653">ingest: load, chunk, scan</text>
+    <rect class="planned" x="40" y="680" width="380" height="44" rx="8"/><text class="ink" x="56" y="709">index: embed + store</text>
+  </g>
+  <path class="flow" d="M230 612v12M230 668v12"/>
+  <g class="sans" font-size="22">
+    <text class="amber" x="444" y="644">in progress,</text>
+    <text class="amber" x="444" y="670">not committed yet</text>
+    <text class="muted" x="444" y="709">into the three above</text>
+    <text class="muted" x="40" y="776">After that, queries take the nine trace stages</text>
+    <text class="muted" x="40" y="804">in the header: retrieval, then generation, off by default.</text>
+  </g>
+</svg>
