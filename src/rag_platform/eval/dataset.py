@@ -75,6 +75,16 @@ _DATASET_ID_PATTERN = re.compile(r"\A[a-z0-9][a-z0-9_-]*\Z")
 # 64 - "eval_"(5) - (1 + len(split) + 1 + stamp(16) + 1 + hex(8))
 #   -> dev 29 / test 28 for the dataset-id SEGMENT.
 MAX_DATASET_ID_CHARS = 32
+# Question-id contract (change note 14; reviewed in
+# reports/security_fix_review_publication_plan_20261023.md section 6).
+# Fullmatch on the RAW id, reject-NOT-strip: ':' / '/' / '\' / whitespace /
+# '|' / '%' / quotes / controls / uppercase / non-ASCII are all structurally
+# excluded, so one regex closes every hostile-id sink - request-id segment
+# forgery in eval:<dataset_id>:<split>:<question_id>, the strip/dedup
+# collision that silently lost trace rows, and markdown table-row injection
+# in gate-evidence reports. The 64-char cap mirrors the dataset-id grammar
+# so both variable segments of the request id stay bounded.
+_QUESTION_ID_PATTERN = re.compile(r"\A[a-z0-9][a-z0-9_-]{0,63}\Z")
 
 
 class DatasetIntegrityError(Exception):
@@ -421,6 +431,13 @@ def _validate_question_record(
     question_id = item.get("id")
     if not isinstance(question_id, str) or not question_id.strip():
         raise DatasetIntegrityError(f"{context}: id must be a non-empty string")
+    # Strict identifier contract (change note 14): fullmatch on the raw
+    # value, reject-NOT-strip - a hostile id is refused outright, never
+    # silently normalized, truncated, or repaired.
+    if _QUESTION_ID_PATTERN.fullmatch(question_id) is None:
+        raise DatasetIntegrityError(
+            f"{context}: id must match {_QUESTION_ID_PATTERN.pattern}"
+        )
     if question_id in seen_ids:
         raise DatasetIntegrityError(f"{context}: duplicate question id {question_id!r}")
     q_context = f"{context} id={question_id!r}"
@@ -503,7 +520,10 @@ def _validate_question_record(
         raise DatasetIntegrityError(f"{q_context}: structures must be a string list")
     seen_ids.add(question_id)
     return Question(
-        question_id=question_id.strip(),
+        # The strict id contract above rejects surrounding whitespace, so
+        # the stored value is byte-identical to the manifest value - no
+        # strip, no normalization (change note 14).
+        question_id=question_id,
         type=q_type,
         expected_outcome=outcome,
         question=question,

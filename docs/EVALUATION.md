@@ -58,6 +58,13 @@ CLI exit `3`):
 
 - `type` ∈ {single-hop, multi-hop, unanswerable, conflict-aware,
   injection-adjacent}; `expected_outcome` ∈ {answer, abstain, flag-conflict};
+- **`id`**: strict identifier contract (change note 14) — full-string match on
+  `\A[a-z0-9][a-z0-9_-]{0,63}\Z`, enforced at question load. Invalid ids are
+  **rejected**, never stripped, normalized, truncated, or repaired. This
+  structurally excludes `:` (request-id segment forgery), `/` and `\` (paths),
+  whitespace/newlines/controls, `|` (markdown table-row injection), quotes,
+  `%`, uppercase, and non-ASCII. All 114 frozen corpus ids satisfy it
+  unchanged;
 - label rules: `answer` ⇒ non-empty gold set + gold answer; `abstain` and
   `unanswerable` ⇒ no gold; `gold_answer_span` must reference a gold chunk with
   `0 ≤ char_start < char_end`; IDs unique per file; ≤ 2000 chars per question;
@@ -170,6 +177,9 @@ printed in every report header (§9.4).
 
 - Deterministic request IDs: `eval:<dataset>:<split>:<question_id>` — every
   report row links to its `traces`/`trace_stages` rows in the run database.
+  The strict `id` contract (§2, change note 14) excludes `:` from question
+  ids, so this shape is structurally guaranteed to stay exactly four segments
+  — a hostile id can no longer forge extra segments.
 - Stage vocabulary (frozen in `observability.py`): retrieval ∈ {ok,
   no_candidates, insufficient_evidence}; context_build ∈ {ok, budget_invalid,
   budget_exhausted}. A query that abstains before context building honestly has

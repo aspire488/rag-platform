@@ -11,9 +11,9 @@ has not done as plainly as what it has. The header lists the nine stages every r
 
 > [!NOTE]
 > **Where it stands:** all eight phases are committed (Phases 4–8 published 2026-10-23 in three commits, merged with
-> this README redesign). The lexical retrieval pipeline runs end to end through the API and CLI; generation is off by
-> default, so nothing writes text. Last full suite: **702 passed, 1 skipped, 1 warning**. Gate M1 is **not** passed
-> (5 passed / 4 blocked).
+> this README redesign, then hardened by the `question_id` integrity follow-up). The lexical retrieval pipeline runs
+> end to end through the API and CLI; generation is off by default, so nothing writes text. Last full suite:
+> **800 passed, 1 skipped, 1 warning**. Gate M1 is **not** passed (5 passed / 4 blocked).
 
 [Architecture](#architecture) | [Status](#status-board) | [Inside the code](#inside-the-code) |
 [Run it](#run-it) | [Limits](#known-limits) | [Plan v2.4](RAG_Platform_Master_Plan_v2.4.md) |
@@ -166,9 +166,9 @@ The CLI shares the same pipeline:
 .venv\Scripts\python.exe -m rag_platform.cli eval --dataset corpora\synthetic_v1 --split dev
 ```
 
-Last full run, 2026-10-23: **702 passed, 1 skipped, 1 warning** (31.92 s) — the skip is the Windows symlink-privilege
+Last full run, 2026-10-24: **800 passed, 1 skipped, 1 warning** (39.22 s) — the skip is the Windows symlink-privilege
 fixture, the warning an upstream Starlette deprecation, both pre-existing. Record chain, each superseding the last as
-code changed: 641 (Phase 8, pre-fix) → 696 → **702**. Tests are hermetic: no network, no model load, fixtures under
+code changed: 641 (Phase 8, pre-fix) → 696 → 702 → **800**. Tests are hermetic: no network, no model load, fixtures under
 `data\tmp`. From any drive the two `D:`-layout tests fail by design. A `.env` file is optional; copy
 [`.env.example`](.env.example), which keeps egress off.
 
@@ -225,12 +225,14 @@ data/ reports/ .cache/ gitignored runtime state
 - **Gate M1 is not passed: 5 passed / 4 blocked.** The blocked criteria — generation-enabled run, score-floor approval,
   the BG-1a verdict, and the generation-spike memory measurement — are recorded with reasons in the evidence checklist
   and change note §13; none is waived.
-- **`question_id` allowlist is not implemented.** Only self-authored, hash-frozen datasets may be evaluated. A
-  non-self-authored dataset could forge `:`-delimited request ids or inject markdown rows; fix deferred pending owner
-  approval (change note §13).
+- **`question_id` validation is implemented; third-party data is not approved by that fact.** Question ids now
+  fullmatch a strict contract (`\A[a-z0-9][a-z0-9_-]{0,63}\Z`, reject-NOT-strip) at dataset load, closing request-id
+  forgery, silent trace loss, and markdown-row injection (change note §14). That is an *identifier-integrity* control
+  only: hashes freeze self-consistency, not authorship, so any dataset the project did not author must not be treated
+  as approved until its use is separately reviewed.
 - **C1 and C2 are not independently test-verified.** The commits are grouped by file, so only the final tree carries a
-  green run. The authoritative full-suite record is 702 passed / 1 skipped / 1 warning (2026-10-23); the chain 641 →
-  696 → 702 each superseded the last as code changed.
+  green run. The authoritative full-suite record is 800 passed / 1 skipped / 1 warning (2026-10-24); the chain 641 →
+  696 → 702 → 800 each superseded the last as code changed.
 - **No benchmark numbers.** BG-1a has no valid result; the repo claims no throughput, latency, or quality figures.
 - **The 90 % RAM ceiling is a policy, not code.** The app can only refuse or stop its own work (plan §10.4).
 - **Windows and `D:` only.** Two tests assert the project lives on `D:` and fail anywhere else.
@@ -245,11 +247,10 @@ Committed so far: [`282cd11`](https://github.com/aspire488/rag-platform/commit/2
 [`247b899`](https://github.com/aspire488/rag-platform/commit/247b899) this README, then the three publication commits of
 2026-10-23: [`eacd8e5`](https://github.com/aspire488/rag-platform/commit/eacd8e5) phases 4–6 and the frozen corpus,
 [`c8f013c`](https://github.com/aspire488/rag-platform/commit/c8f013c) phase 7, [`88f023e`](https://github.com/aspire488/rag-platform/commit/88f023e) phase 8
-and the dataset-id security amendment.
+and the dataset-id security amendment — then, on 2026-10-24, the `question_id` integrity follow-up (change note §14).
 
 | Remaining work | Unlocks |
 | --- | --- |
-| `question_id` allowlist (change note §13) | Safe evaluation of datasets the project did not author |
 | The four blocked Gate M1 criteria | A claimable Gate M1 |
 | BG-1a benchmark, owner-gated at the resource floors | The phase-6 generation verdict |
 | Milestones M2–M4 | Tenancy, evidence ledger, adaptive budget |
