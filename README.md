@@ -6,11 +6,11 @@
 Its data, caches, virtual environment and databases stay inside the project directory, and it sends nothing over the
 network by default. It is built in order, from the storage layer up, against a written plan, and it reports what it
 has not done as plainly as what it has. The header lists the nine stages every request will pass through, from
-`authn` to `response`. The retrieval leg (ingest, store, retrieve) now runs end to end; the answer stages that follow
-`generate` do not — generation is off by default, so a query retrieves and abstains rather than writing text.
+`authn` to `response`, and marks which are built. The retrieval leg (ingest, store, retrieve) now runs end to end;
+`generation` does not — it is off by default, so a query retrieves and abstains rather than writing text.
 
 > [!NOTE]
-> **Where it stands:** all eight phases are committed (Phases 4–8 published 2026-10-23 in three commits, merged with
+> **Where it stands:** all nine phases (0–8) are committed (Phases 4–8 published 2026-10-23 in three commits, merged with
 > this README redesign, then hardened by the `question_id` integrity follow-up). The lexical retrieval pipeline runs
 > end to end through the API and CLI; generation is off by default, so nothing writes text. Last full suite:
 > **800 passed, 1 skipped, 1 warning**. Gate M1 is **not** passed (5 passed / 4 blocked).
@@ -30,9 +30,10 @@ The drawing above is a phase-0–3 snapshot and now lags the code; the wiring it
 1. **Runs today.** `create_app()` validates `Settings`, installs the redacting log handler and serves two routes,
    `GET /health` and `POST /query`. Ingestion (phase 4), hybrid retrieval (phase 5), the API/CLI surface (phase 7) and
    the evaluation harness (phase 8) are committed and tested; a query runs the lexical retrieval leg end to end.
-2. **Built, wired around a stub.** The embedder, the vector store and the SQLite schema are called by the pipeline,
-   but the dense leg still runs on a stub: the real MiniLM model has never loaded here, so evaluation measures the
-   FTS5 leg only.
+2. **Built, not switched on.** The SQLite schema is called by the pipeline; the embedder and the vector store are not.
+   The app builds the retriever with `embedder=None, store=None`, so the dense leg is inert and retrieval is
+   lexical-only (`retrieval_mode: lexical_only`). The dense path and the MiniLM wrapper are unit-tested against stub
+   embedders, but no production code constructs one, and the real model has never loaded here.
 3. **Off or gated.** Generation (phase 6) is committed but off by default — a query abstains rather than writing text.
    Phases 9–11 (cloud providers, tenancy) are design from the plan (§5 and §15), not code.
 
@@ -42,7 +43,6 @@ The drawing above is a phase-0–3 snapshot and now lags the code; the wiring it
 | --- | --- |
 | ● | Built and wired into the running app |
 | ◐ | Built and tested on its own; nothing calls it yet |
-| ✎ | In progress, not committed |
 | ○ | Planned in the canonical plan; no code |
 | ⊘ | Off by default |
 | – | Not measured |
@@ -53,11 +53,11 @@ The drawing above is a phase-0–3 snapshot and now lags the code; the wiring it
 | Redacted logging, [`logging_setup.py`](src/rag_platform/logging_setup.py) | ● built, wired | `test_logging_redaction.py` |
 | `GET /health` and `POST /query`, [`main.py`](src/rag_platform/main.py) | ● built, wired | `test_health.py`, `test_api_query.py`, `egress/` |
 | SQLite (WAL) + FTS5 + trace tables, [`db/`](src/rag_platform/db) | ● built, wired | `test_db_sqlite.py`; tracing writes on every query |
-| Qdrant local adapter, [`vectorstore/`](src/rag_platform/vectorstore) | ● built, wired | `test_vectorstore_qdrant.py`; dense leg uses a stub embedder |
-| MiniLM wrapper, [`minilm.py`](src/rag_platform/embeddings/minilm.py) | ◐ built, wired, unexercised | `test_embeddings_wrapper.py`; stub model only, the real model has never loaded |
-| Model cache copy with SHA-256 check, [`cache.py`](src/rag_platform/embeddings/cache.py) | ● built, wired | `test_embeddings_cache.py` |
+| Qdrant local adapter, [`vectorstore/`](src/rag_platform/vectorstore) | ◐ built, unwired | `test_vectorstore_qdrant.py`; never constructed in production, so the dense leg stays inert |
+| MiniLM wrapper, [`minilm.py`](src/rag_platform/embeddings/minilm.py) | ◐ built, unexercised | `test_embeddings_wrapper.py`; stub model only, the real model has never loaded |
+| Model cache copy with SHA-256 check, [`cache.py`](src/rag_platform/embeddings/cache.py) | ◐ built, unwired | `test_embeddings_cache.py`; no production caller yet |
 | Ingestion: loaders, chunker, injection scan (phase 4) | ● built, wired | committed in C1; `test_ingestion_*.py` |
-| Hybrid retrieval: dense + FTS5 + RRF (phase 5) | ● built, wired | lexical leg live; dense leg on the stub embedder |
+| Hybrid retrieval: dense + FTS5 + RRF (phase 5) | ● built, wired | lexical leg live; dense leg inert (`no_embedder`, `no_vector_store`) |
 | Generation, citations, abstention (phase 6) | ⊘ built, off by default | committed; inert Ollama adapter, gated on BG-1a |
 | `LOCAL_GENERATION_ENABLED` | ⊘ off by default | generation code exists but is switched off and unverified |
 | `EGRESS_MODE` | ⊘ off by default | `egress/test_no_outbound.py` |
@@ -113,8 +113,8 @@ environment and an optional project-root `.env`.
 - **The schema** ([`db/schema.sql`](src/rag_platform/db/schema.sql)) holds an FTS5 keyword index (`chunk_fts`) and
   three trace tables. `trace_stages` only accepts the nine stage names from the header image, one row per stage per
   request, with excerpts capped at 200 characters. `trace_authz` records allowed and denied document IDs, never
-  content. Boundary tracing writes here on every `/query` and CLI run (best-effort), and the evaluation harness adds
-  its own observer timings in phase 8.
+  content. Boundary tracing writes here on every `/query` and CLI run (best-effort), and the evaluation harness
+  (phase 8) adds its own observer timings.
 - **Qdrant** ([`vectorstore/qdrant_local.py`](src/rag_platform/vectorstore/qdrant_local.py)): `QdrantLocalStore` takes
   a filesystem path and has no URL or API-key parameter, so a remote connection cannot be configured. Inputs are
   validated before any write; reads on a missing collection return empty, and writes to a missing collection fail.
@@ -159,17 +159,21 @@ $env:PYTHONPATH = "src"
 .venv\Scripts\python.exe -m uvicorn --factory rag_platform.main:create_app
 ```
 
-The CLI shares the same pipeline:
+The CLI shares the same pipeline. The package is deliberately not installed (`[tool.uv] package = false`), so every
+command needs `PYTHONPATH` pointed at `src` first:
 
 ```powershell
+$env:PYTHONPATH = "src"
+.venv\Scripts\python.exe -m rag_platform.cli ingest --dataset corpora\synthetic_v1
 .venv\Scripts\python.exe -m rag_platform.cli query "your question"
+.venv\Scripts\python.exe -m rag_platform.cli report runs
 .venv\Scripts\python.exe -m rag_platform.cli eval --dataset corpora\synthetic_v1 --split dev
 ```
 
-Last full run, 2026-10-24: **800 passed, 1 skipped, 1 warning** (39.22 s) — the skip is the Windows symlink-privilege
+Last full run, 2026-10-25: **800 passed, 1 skipped, 1 warning** (32.45 s) — the skip is the Windows symlink-privilege
 fixture, the warning an upstream Starlette deprecation, both pre-existing. Record chain, each superseding the last as
 code changed: 641 (Phase 8, pre-fix) → 696 → 702 → **800**. Tests are hermetic: no network, no model load, fixtures under
-`data\tmp`. From any drive the two `D:`-layout tests fail by design. A `.env` file is optional; copy
+`data\tmp`. From any drive the three `D:`-layout tests fail by design. A `.env` file is optional; copy
 [`.env.example`](.env.example), which keeps egress off.
 
 <details>
@@ -184,7 +188,7 @@ code changed: 641 (Phase 8, pre-fix) → 696 → 702 → **800**. Tests are herm
 | Embeddings | sentence-transformers on CPU-only torch |
 | Vector store | qdrant-client in local, file-backed mode |
 | Keyword store and traces | SQLite (stdlib) with FTS5 |
-| Documents (phase 4) | pypdf |
+| Documents (phase 4, committed) | pypdf |
 | Resource gates | psutil |
 | Tests and audit | pytest, pytest-cov, pip-audit |
 
@@ -198,7 +202,7 @@ src/rag_platform/
   logging_setup.py     redacting log handler
   main.py              FastAPI app factory, /health and /query
   api.py               /query schemas and the shared run_query pipeline
-  cli.py               argparse CLI: query, eval, report
+  cli.py               argparse CLI: query, ingest, eval, report
   tracing.py           best-effort boundary trace into the phase-2 tables
   observability.py     frozen stage vocabulary and observer seam
   db/                  SQLite opener, migrations, schema.sql
@@ -231,11 +235,11 @@ data/ reports/ .cache/ gitignored runtime state
   only: hashes freeze self-consistency, not authorship, so any dataset the project did not author must not be treated
   as approved until its use is separately reviewed.
 - **C1 and C2 are not independently test-verified.** The commits are grouped by file, so only the final tree carries a
-  green run. The authoritative full-suite record is 800 passed / 1 skipped / 1 warning (2026-10-24); the chain 641 →
+  green run. The authoritative full-suite record is 800 passed / 1 skipped / 1 warning (2026-10-25); the chain 641 →
   696 → 702 → 800 each superseded the last as code changed.
 - **No benchmark numbers.** BG-1a has no valid result; the repo claims no throughput, latency, or quality figures.
 - **The 90 % RAM ceiling is a policy, not code.** The app can only refuse or stop its own work (plan §10.4).
-- **Windows and `D:` only.** Two tests assert the project lives on `D:` and fail anywhere else.
+- **Windows and `D:` only.** Three tests assert the project lives on `D:` and fail anywhere else.
 - **Cloud providers** are a proposal in plan v2.4. None is integrated, verified, or enabled (D13–D18 pending).
 
 ## What comes next
@@ -247,7 +251,9 @@ Committed so far: [`282cd11`](https://github.com/aspire488/rag-platform/commit/2
 [`247b899`](https://github.com/aspire488/rag-platform/commit/247b899) this README, then the three publication commits of
 2026-10-23: [`eacd8e5`](https://github.com/aspire488/rag-platform/commit/eacd8e5) phases 4–6 and the frozen corpus,
 [`c8f013c`](https://github.com/aspire488/rag-platform/commit/c8f013c) phase 7, [`88f023e`](https://github.com/aspire488/rag-platform/commit/88f023e) phase 8
-and the dataset-id security amendment — then, on 2026-10-24, the `question_id` integrity follow-up (change note §14).
+and the dataset-id security amendment — then, on 2026-10-24, the merge folding this redesign together with the phase
+publication ([`7d40909`](https://github.com/aspire488/rag-platform/commit/7d40909)) and, the same evening, the
+`question_id` integrity follow-up ([`5b172cd`](https://github.com/aspire488/rag-platform/commit/5b172cd), change note §14).
 
 | Remaining work | Unlocks |
 | --- | --- |
