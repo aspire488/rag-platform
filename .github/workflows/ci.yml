@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "premium/**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Tests (Python ${{ matrix.python-version }})
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # The project currently declares Python >=3.14 and uses Windows/D:-specific
+        # fixtures. Keep CI aligned with that contract instead of implying portability.
+        python-version: ["3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - name: Set up Python
+        run: uv python install ${{ matrix.python-version }}
+      - name: Prepare project-local environment
+        shell: pwsh
+        run: |
+          . .\scripts\env.ps1
+          uv sync --group dev
+      - name: Run full test suite
+        shell: pwsh
+        run: |
+          . .\scripts\env.ps1
+          $env:PYTHONPATH = "src"
+          uv run --no-sync python -m pytest -q
+
+  dependency-audit:
+    name: Dependency audit
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+      - name: Set up Python 3.14
+        run: uv python install 3.14
+      - name: Sync development dependencies
+        shell: pwsh
+        run: |
+          . .\scripts\env.ps1
+          uv sync --group dev
+      - name: Run pip-audit
+        shell: pwsh
+        run: |
+          . .\scripts\env.ps1
+          uv run --no-sync pip-audit
